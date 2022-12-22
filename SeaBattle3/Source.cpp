@@ -28,6 +28,7 @@ void show_battle_ground(char* b1, char* b2);
 int main() {
 
 	srand(time(NULL));
+	int n = 0; //переменная для записи новой записи на гит
 	//Game g;
 	char battle_ground_first_player_ship[widght][widght];
 	char battle_ground_first_player_bang[widght][widght];
