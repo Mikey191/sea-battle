@@ -63,3 +63,15 @@
 		|| b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[9]
 		|| b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[0]
 		|| b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[1]
+
+		
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[0] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[1] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[2] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[3] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[4] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[5] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[6] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[7] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[8] &&
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[9]

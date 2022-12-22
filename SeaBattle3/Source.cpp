@@ -9,7 +9,7 @@ using namespace std;
 char space = ' ';
 char numbers[10] = { '1', '2', '3', '4','5','6','7','8','9','10' };
 char letters[10] = { 'a', 'b', 'c', 'd','e','f','j','h','i','j' };
-char symbols[2] = { '*', '.' };
+char symbols[3] = { '*', '.', '+'};
 //
 
 void show_ground(char b1[][widght]);
@@ -64,13 +64,13 @@ void fill_ground_space(char b1[][widght]) {
 
 	for (int i = 0; i < 1; i++) {
 		for (int j = 1; j < widght; j++) {
-			b1[i][j] = numbers[j-1];
+			b1[i][j] = numbers[j - 1];
 		}
 	}
 
 	for (int i = 1; i < widght; i++) {
 		for (int j = 0; j < 1; j++) {
-			b1[i][j] = letters[i-1];
+			b1[i][j] = letters[i - 1];
 		}
 	}
 
@@ -109,18 +109,18 @@ void fill_ground_random(char b1[][widght]) {
 	bool flag = 0;
 	//направление построение(1 = влево или 0 = вверх)
 	//int dir = rand() % 1;
-
-
 	//system("pause");
 
-	do 
-	{
+	//влево 4 палубы
+	do {
+		do
+		{
 		//координаты стартовой точки корабля
 		int x_rand_for_start_ship = rand() % 10;
 		int y_rand_for_start_ship = rand() % 10;
 		//направление построение(1 = влево или 0 = вверх)
 		int dir = rand() % 1;
-		cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
+		//cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
 		if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0]
 			&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[1]
 			&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[2]
@@ -143,10 +143,10 @@ void fill_ground_random(char b1[][widght]) {
 			&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[9]
 			&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[0]
 			&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[1]
-		)
-		{
+			&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[2]
+			){
 			//--y_rand_for_start_ship; cout << "new_y = " << y_rand_for_start_ship << endl;
-			if (b1[x_rand_for_start_ship][y_rand_for_start_ship-1] != numbers[0]
+			if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[0]
 				&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[1]
 				&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[2]
 				&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[3]
@@ -168,7 +168,8 @@ void fill_ground_random(char b1[][widght]) {
 				&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[9]
 				&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[0]
 				&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[1]
-				){
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[2]
+				) {
 				//y_rand_for_start_ship--; cout << "new_y = " << y_rand_for_start_ship << endl;
 				if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[0]
 					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[1]
@@ -192,6 +193,7 @@ void fill_ground_random(char b1[][widght]) {
 					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[9]
 					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != symbols[0]
 					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != symbols[1]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != symbols[2]
 					) {
 					//y_rand_for_start_ship--; cout << "new_y = " << y_rand_for_start_ship << endl;
 					if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] != numbers[0]
@@ -216,39 +218,323 @@ void fill_ground_random(char b1[][widght]) {
 						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] != letters[9]
 						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] != symbols[0]
 						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] != symbols[1]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] != symbols[2]
 						) {
-							//постраение корабля
-							b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-							b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
-							b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
-							b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[0];
-							//постраение области вокруг коробля
-								//заполняем строчку выше
-							b1[x_rand_for_start_ship+1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship+1][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship+1][y_rand_for_start_ship - 2] = symbols[1];
-							b1[x_rand_for_start_ship+1][y_rand_for_start_ship - 3] = symbols[1];
-								//заполняем строчку ниже
-							b1[x_rand_for_start_ship-1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship-1][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship-1][y_rand_for_start_ship - 2] = symbols[1];
-							b1[x_rand_for_start_ship-1][y_rand_for_start_ship - 3] = symbols[1];
-								//заполняем столбец левее
+						//постраение корабля
+						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[0];
+						//постраение области вокруг коробля
+							//заполняем строчку выше //область выше не должна быть равно letters x_rand_for_start_ship + 1 != letters
+						if (x_rand_for_start_ship + 1 != 0) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 3] = symbols[1];
+						}
+							//заполняем строчку ниже//область ниже не должна быть пустой
+						if (x_rand_for_start_ship - 1 != 9) {
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 3] = symbols[1];
+						}
+							//заполняем столбец левее //область левее не должена быть равно numbers y_rand_for_start_ship - 4 != numbers
+						if (y_rand_for_start_ship - 4 != 0) {
 							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 4] = symbols[1];
 							b1[x_rand_for_start_ship][y_rand_for_start_ship - 4] = symbols[1];
 							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 4] = symbols[1];
-								//заполняем столбец правее
+						}
+							//заполняем столбец правее //область правее не должна быть пустой 
+						if (y_rand_for_start_ship + 1 != 9) {
 							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
 							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
 							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-							flag = true;
-							ship_count--;
+						}
+						flag = true;
+						ship_count--;
+					}
+				}
+			}
+		}
+		} while (flag != true);
+		flag = false;
+	}while (ship_count != 9);
+	//влево 2 3х палубных
+	do {
+		do
+		{
+			//координаты стартовой точки корабля
+			int x_rand_for_start_ship = rand() % 10;
+			int y_rand_for_start_ship = rand() % 10;
+			//направление построение(1 = влево или 0 = вверх)
+			int dir = rand() % 1;
+			//cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
+			if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[1]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[2]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[3]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[4]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[5]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[6]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[7]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[8]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[9]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[1]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[2]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[3]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[4]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[5]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[6]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[7]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[8]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[9]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[1]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[2]
+				){
+				//--y_rand_for_start_ship; cout << "new_y = " << y_rand_for_start_ship << endl;
+				if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[0]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[1]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[2]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[3]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[4]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[5]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[6]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[7]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[8]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[9]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[0]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[1]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[2]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[3]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[4]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[5]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[6]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[7]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[8]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[9]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[0]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[1]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[2]
+					) {
+					//y_rand_for_start_ship--; cout << "new_y = " << y_rand_for_start_ship << endl;
+					if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[0]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[1]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[2]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[3]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[4]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[5]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[6]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[7]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[8]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[9]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[0]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[1]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[2]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[3]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[4]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[5]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[6]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[7]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[8]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != letters[9]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != symbols[0]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != symbols[1]
+						&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != symbols[2]
+						) {
+						//y_rand_for_start_ship--; cout << "new_y = " << y_rand_for_start_ship << endl;
+						//постраение корабля
+						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
+						//постраение области вокруг коробля
+							//заполняем строчку выше
+						if (x_rand_for_start_ship + 1 != 0) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
+						}
+							//заполняем строчку ниже
+						if (x_rand_for_start_ship - 1 != 9) {
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
+						}
+							//заполняем столбец левее
+						if (y_rand_for_start_ship - 3 != 0) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 3] = symbols[1];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 3] = symbols[1];
+						}
+							//заполняем столбец правее
+						if (y_rand_for_start_ship + 1 != 9) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
+						}
+						flag = true;
+						ship_count--;							
 						}
 					}
 				}
-		}
-	} while (flag != true);
-	flag = false;
+			}while (flag != true);
+		flag = false;
+	} while (ship_count != 7);
+	//влево 3 2х палубных
+	do {
+		do
+		{
+			//координаты стартовой точки корабля
+			int x_rand_for_start_ship = rand() % 10;
+			int y_rand_for_start_ship = rand() % 10;
+			//направление построение(1 = влево или 0 = вверх)
+			int dir = rand() % 1;
+			//cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
+			if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[1]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[2]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[3]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[4]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[5]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[6]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[7]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[8]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[9]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[1]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[2]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[3]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[4]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[5]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[6]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[7]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[8]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[9]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[1]
+				) {
+				//--y_rand_for_start_ship; cout << "new_y = " << y_rand_for_start_ship << endl;
+				if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[0]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[1]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[2]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[3]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[4]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[5]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[6]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[7]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[8]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[9]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[0]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[1]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[2]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[3]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[4]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[5]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[6]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[7]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[8]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != letters[9]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[0]
+					&& b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != symbols[1]
+					) {
+						//постраение корабля
+						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
+						//постраение области вокруг коробля
+							//заполняем строчку выше
+						if (x_rand_for_start_ship + 1 != 0) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
+						}
+							//заполняем строчку ниже
+						if (x_rand_for_start_ship - 1 != 9) {
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
+						}
+							//заполняем столбец левее
+						if (y_rand_for_start_ship - 2 != 0) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
+						}
+							//заполняем столбец правее
+						if (y_rand_for_start_ship + 1 != 9) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
+						}
+						flag = true;
+						ship_count--;
+					}
+			}
+		} while (flag != true);
+		flag = false;
+	} while (ship_count != 4);
+	//влево 4 1о палубных
+	do {
+		do
+		{
+			//координаты стартовой точки корабля
+			int x_rand_for_start_ship = rand() % 10;
+			int y_rand_for_start_ship = rand() % 10;
+			//направление построение(1 = влево или 0 = вверх)
+			int dir = rand() % 1;
+			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
+			if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[1]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[2]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[3]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[4]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[5]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[6]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[7]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[8]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[9]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[1]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[2]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[3]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[4]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[5]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[6]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[7]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[8]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[9]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[0]
+				&& b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[1]
+				) {
+					//постраение корабля
+					b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
+					//постраение области вокруг коробля
+						//заполняем строчку выше
+					if (x_rand_for_start_ship + 1 != 0) {
+						b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
+					}
+					//заполняем строчку ниже
+					if (x_rand_for_start_ship - 1 != 9) {
+						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
+					}
+					//заполняем столбец левее
+					if (y_rand_for_start_ship - 1 != 0) {
+						b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[1];
+						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
+					}
+					//заполняем столбец правее
+					if (y_rand_for_start_ship + 1 != 9) {
+						b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
+						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
+					}
+					flag = true;
+					ship_count--;
+				}
+		} while (flag != true);
+		flag = false;
+	} while (ship_count != 0);
 	//cout << "flag = " << flag << endl;
 	show_ground(b1);
 }
