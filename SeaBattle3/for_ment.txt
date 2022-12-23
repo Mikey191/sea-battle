@@ -75,3 +75,22 @@
 							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[7] &&
 							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[8] &&
 							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[9]
+
+выше (x_rand_for_start_ship > 1)
+ниже (x_rand_for_start_ship < 9)
+левее (y_rand_for_start_ship - 3 > 1) сдесь меняется цифра в зависимовсти 
+правее (y_rand_for_start_ship < 9)
+
+выше (x_rand_for_start_ship > 0)
+ниже (x_rand_for_start_ship < 10)
+левее (y_rand_for_start_ship - 3 > 0)меняется цифра в зависимовсти 
+		(y_rand_for_start_ship - 2 > 0)
+		(y_rand_for_start_ship - 1 > 0)
+правее (y_rand_for_start_ship < 10)
+
+выше (y_rand_for_start_ship > 0)
+ниже (y_rand_for_start_ship < 10)
+левее (x_rand_for_start_ship - 3 > 0)меняется цифра в зависимовсти 
+		(x_rand_for_start_ship - 2 > 0)
+		(x_rand_for_start_ship - 1 > 0)
+правее (x_rand_for_start_ship < 10)
