@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <conio.h>
 using namespace std;
 #define widght 11
 
@@ -19,8 +20,6 @@ void gamePve(char* b1, char* b2, char* b3, char* b4);
 
 void fill_ground_space(char b1[][widght]);
 void fill_ground_player(char b1[][widght]);
-void fill_ground_random_left(char b1[][widght]);
-void fill_ground_random_up(char b1[][widght]);
 void fill_ground_random(char b1[][widght]);
 
 void bang(char* b1, char* b2);
@@ -54,7 +53,7 @@ int main() {
 		switch (menu) {
 		case 1: cout << "PvP" << endl; break;
 		case 2: cout << "PvE" << endl; break;
-		case 3: fill_ground_random(battle_ground_first_player_ship); break;
+		case 3: fill_ground_player(battle_ground_first_player_ship); break;
 		}
 	} while (menu != 0);
 
@@ -85,14 +84,14 @@ void fill_ground_space(char b1[][widght]) {
 }
 
 void show_ground(char b1[][widght]) {
+	system("cls");
 	for (int i = 0; i < widght; i++) {
 		for (int j = 0; j < widght; j++) {
 			cout << b1[i][j] << " ";
 		}cout << endl;
 	}
-	system("pause");
+	//system("pause");
 }
-
 bool chek_random_left_first(char b1[][widght],const int &x_rand_for_start_ship,const int &y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0] &&
@@ -121,7 +120,6 @@ bool chek_random_left_first(char b1[][widght],const int &x_rand_for_start_ship,c
 		) chek = true;
 	return chek;
 }
-
 bool chek_random_left_second(char b1[][widght],const int &x_rand_for_start_ship,const int &y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] != numbers[0] &&
@@ -150,7 +148,6 @@ bool chek_random_left_second(char b1[][widght],const int &x_rand_for_start_ship,
 		) chek = true;
 	return chek;
 }
-
 bool chek_random_left_therd(char b1[][widght], int x_rand_for_start_ship, int y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] != numbers[0] &&
@@ -179,7 +176,6 @@ bool chek_random_left_therd(char b1[][widght], int x_rand_for_start_ship, int y_
 		) chek = true;
 		return chek;
 }
-
 bool chek_random_left_fourth(char b1[][widght], int x_rand_for_start_ship, int y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] != numbers[0] &&
@@ -208,250 +204,6 @@ bool chek_random_left_fourth(char b1[][widght], int x_rand_for_start_ship, int y
 		) chek = true;
 	return chek;
 }
-
-void fill_ground_random_left(char b1[][widght]) {
-	//правила заполнения
-		//корабли компьютер строит либо вверх либо влево
-		//рандомно выбирает точку старта.Если в это точке есть "точка" или "цифра" или "буква" или "умножение" точка не может быть выбрана, и он выбирает заного пока не выберит пустую
-		//рандомно выбирает направление.
-		//роверить длину корабля, который надо поставить
-		//проверить если длина корабля от точки начала до конца не пересикает "точка" или "цифра" или "буква" или "умножение", то корабль можно строить
-		// если вверх j - const
-		// если влево i - const
-	//---------------------------------------------------------------------------------------------------------------------------------------------------
-
-	//счетчик кол-ва кораблей
-	int ship_count = 10;
-	//координаты стартовой точки корабля
-	//int x_rand_for_start_ship = rand() % 10;
-	//int y_rand_for_start_ship = rand() % 10;
-	bool flag = 0;
-	//направление построение(1 = влево или 0 = вверх)
-	//int dir = rand() % 1;
-	//system("pause");
-
-	//влево 4 палубы
-	do {
-		do
-		{
-		//координаты стартовой точки корабля
-		int x_rand_for_start_ship = rand() % 11;
-		int y_rand_for_start_ship = rand() % 11;
-		//направление построение(1 = влево или 0 = вверх)
-		int dir = rand() % 2;
-		cout << "4 palubi: ";
-		cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl << endl;
-		if (chek_random_left_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)){
-			if (chek_random_left_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-				if (chek_random_left_therd(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-					if (chek_random_left_fourth(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-						//постраение корабля
-						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[0];
-						//постраение области вокруг коробля
-							//заполняем строчку выше 
-						if (x_rand_for_start_ship > 1) {
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 3] = symbols[1];
-						}
-							//заполняем строчку ниже//область ниже не должна быть пустой
-						if (x_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 3] = symbols[1];
-						}
-							//заполняем столбец левее 
-						if (y_rand_for_start_ship - 3 > 1) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship - 4] = symbols[1];//центральная левая точка
-							if(x_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 4] = symbols[1];//верхняя левая точка
-							if(x_rand_for_start_ship < 10)
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 4] = symbols[1];//нижняя левая точка
-						}
-							//заполняем столбец правее //область правее не должна быть пустой 
-						if (y_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];//центральня правая точка
-							if (x_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];//верхняя правая точка
-							if(x_rand_for_start_ship < 10)
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];//нижняя правая точка
-						}
-						flag = true;
-						ship_count--;
-						cout << "4 palub ship is bilding!" << endl;
-					}
-				}
-			}
-		}
-		} while (flag != true);
-		flag = false;
-	}while (ship_count > 9);
-	show_ground(b1);
-	//влево 2 3х палубных
-	do {
-		do
-		{
-			//координаты стартовой точки корабля
-			int x_rand_for_start_ship = rand() % 11;
-			int y_rand_for_start_ship = rand() % 11;
-			//направление построение(1 = влево или 0 = вверх)
-			int dir = rand() % 2;
-			cout << "3 palubi: ";
-			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
-			if (chek_random_left_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)){
-				if (chek_random_left_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-					if (chek_random_left_therd(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-						//постраение корабля
-						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
-						//постраение области вокруг коробля
-							//заполняем строчку выше
-						if (x_rand_for_start_ship > 1) {
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
-						}
-							//заполняем строчку ниже
-						if (x_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
-						}
-							//заполняем столбец левее
-						if (y_rand_for_start_ship - 2 > 1) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[1];
-							if (x_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 3] = symbols[1];
-							if (x_rand_for_start_ship < 10)
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 3] = symbols[1];
-						}
-							//заполняем столбец правее
-						if (y_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
-							if (x_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-							if (x_rand_for_start_ship < 10)
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
-						}
-						flag = true;
-						ship_count--;	
-						cout << "3 palub ship is bilding!" << endl;
-						}
-					}
-				}
-			}while (flag != true);
-		flag = false;
-	} while (ship_count > 7);
-	show_ground(b1);
-	//влево 3 2х палубных
-	do {
-		do
-		{
-			//координаты стартовой точки корабля
-			int x_rand_for_start_ship = rand() % 11;
-			int y_rand_for_start_ship = rand() % 11;
-			//направление построение(1 = влево или 0 = вверх)
-			int dir = rand() % 2;
-			cout << "2 palubi: ";
-			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
-			if (chek_random_left_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-				if (chek_random_left_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)
-					) {
-						//постраение корабля
-						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
-						//постраение области вокруг коробля
-							//заполняем строчку выше
-						if (x_rand_for_start_ship > 1) {
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-						}
-							//заполняем строчку ниже
-						if (x_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-						}
-							//заполняем столбец левее
-						if (y_rand_for_start_ship - 1 > 1) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[1];
-							if(x_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
-							if(x_rand_for_start_ship < 10)
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
-						}
-							//заполняем столбец правее
-						if (y_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
-							if(x_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-							if(x_rand_for_start_ship < 10)
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
-						}
-						flag = true;
-						ship_count--;
-						cout << "2 palub ship is bilding!" << endl;
-					}
-			}
-		} while (flag != true);
-		flag = false;
-	} while (ship_count > 4);
-	show_ground(b1);
-	//влево 4 1о палубных
-	do {
-		do
-		{
-			//координаты стартовой точки корабля
-			int x_rand_for_start_ship = rand() % 11;
-			int y_rand_for_start_ship = rand() % 11;
-			//направление построение(1 = влево или 0 = вверх)
-			int dir = rand() % 2;
-			cout << "1 paluba: ";
-			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
-			if (chek_random_left_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-					//постраение корабля
-					b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-					//постраение области вокруг коробля
-						//заполняем строчку выше
-					if (x_rand_for_start_ship > 1) {
-						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
-					}
-					//заполняем строчку ниже
-					if (x_rand_for_start_ship < 10) {
-						b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-					}
-					//заполняем столбец левее
-					if (y_rand_for_start_ship > 1) {
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[1];
-						if (x_rand_for_start_ship > 1)
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-						if (x_rand_for_start_ship < 10)
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-					}
-					//заполняем столбец правее
-					if (y_rand_for_start_ship < 10) {
-						b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
-						if (x_rand_for_start_ship > 1)
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-						if (x_rand_for_start_ship < 10)
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
-					}
-					flag = true;
-					ship_count--;
-					cout << "1 palub ship is bilding!" << endl;
-				}
-		} while (flag != true);
-		flag = false;
-	} while (ship_count > 0);
-	//cout << "flag = " << flag << endl;
-	show_ground(b1);
-}
-
 bool chek_random_up_first(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0] &&
@@ -480,7 +232,6 @@ bool chek_random_up_first(char b1[][widght], const int& x_rand_for_start_ship, c
 		) chek = true;
 	return chek;
 }
-
 bool chek_random_up_second(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] != numbers[0] &&
@@ -509,7 +260,6 @@ bool chek_random_up_second(char b1[][widght], const int& x_rand_for_start_ship, 
 		) chek = true;
 	return chek;
 }
-
 bool chek_random_up_therd(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship - 2][y_rand_for_start_ship] != numbers[0] &&
@@ -538,7 +288,6 @@ bool chek_random_up_therd(char b1[][widght], const int& x_rand_for_start_ship, c
 		) chek = true;
 	return chek;
 }
-
 bool chek_random_up_fourth(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship - 3][y_rand_for_start_ship] != numbers[0] &&
@@ -567,232 +316,6 @@ bool chek_random_up_fourth(char b1[][widght], const int& x_rand_for_start_ship, 
 		) chek = true;
 	return chek;
 }
-
-void fill_ground_random_up(char b1[][widght]) {
-	//счетчик кол-ва кораблей
-	int ship_count = 10;
-	bool flag = 0;
-	//наверх 4 палубы
-	do {
-		do
-		{
-			//координаты стартовой точки корабля
-			int x_rand_for_start_ship = rand() % 11;
-			int y_rand_for_start_ship = rand() % 11;
-			//направление построение(1 = влево или 0 = вверх)
-			int dir = rand() % 2;
-			cout << "4 palubi: ";
-			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl << endl;
-			if (chek_random_up_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-				if (chek_random_up_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-					if (chek_random_up_therd(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-						if (chek_random_up_fourth(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-							//постраение корабля
-							b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[0];
-							b1[x_rand_for_start_ship - 2][y_rand_for_start_ship] = symbols[0];
-							b1[x_rand_for_start_ship - 3][y_rand_for_start_ship] = symbols[0];
-							//постраение области вокруг коробля
-								//заполняем строчку выше 
-							if (x_rand_for_start_ship - 3 > 1) {
-								b1[x_rand_for_start_ship - 4][y_rand_for_start_ship] = symbols[1];
-								if (y_rand_for_start_ship > 1)
-									b1[x_rand_for_start_ship - 4][y_rand_for_start_ship - 1] = symbols[1];
-								if (y_rand_for_start_ship < 10)
-									b1[x_rand_for_start_ship - 4][y_rand_for_start_ship + 1] = symbols[1];
-							}
-								//заполняем строчку ниже
-							if (x_rand_for_start_ship < 10) {
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-								if (y_rand_for_start_ship > 1)
-									b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-								if (y_rand_for_start_ship < 10)
-									b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
-							}
-								//заполняем столбец левее 
-							if (y_rand_for_start_ship > 1) {
-								b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[1];
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-								b1[x_rand_for_start_ship - 2][y_rand_for_start_ship - 1] = symbols[1];
-								b1[x_rand_for_start_ship - 3][y_rand_for_start_ship - 1] = symbols[1];
-							}
-								//заполняем столбец правее 
-							if (y_rand_for_start_ship < 10) {
-								b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
-								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-								b1[x_rand_for_start_ship - 2][y_rand_for_start_ship + 1] = symbols[1];
-								b1[x_rand_for_start_ship - 3][y_rand_for_start_ship + 1] = symbols[1];
-							}
-							flag = true;
-							ship_count--;
-							cout << "4 palub ship is bilding!" << endl;
-						}
-					}
-				}
-			}
-		} while (flag != true);
-		flag = false;
-	} while (ship_count > 9);
-	show_ground(b1);
-	//влево 2 3х палубных
-	do {
-		do
-		{
-			//координаты стартовой точки корабля
-			int x_rand_for_start_ship = rand() % 11;
-			int y_rand_for_start_ship = rand() % 11;
-			//направление построение(1 = влево или 0 = вверх)
-			int dir = rand() % 2;
-			cout << "3 palubi: ";
-			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
-			if (chek_random_up_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-				if (chek_random_up_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-					if (chek_random_up_therd(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-						//постраение корабля
-						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[0];
-						b1[x_rand_for_start_ship - 2][y_rand_for_start_ship] = symbols[0];
-						//постраение области вокруг коробля
-							//заполняем строчку выше
-						if (x_rand_for_start_ship - 2 > 1) {
-							b1[x_rand_for_start_ship - 3][y_rand_for_start_ship] = symbols[1];
-							if (y_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship - 3][y_rand_for_start_ship - 1] = symbols[1];
-							if (y_rand_for_start_ship < 10)
-								b1[x_rand_for_start_ship - 3][y_rand_for_start_ship + 1] = symbols[1];
-						}
-						//заполняем строчку ниже
-						if (x_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-							if (y_rand_for_start_ship > 1)
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-							if (y_rand_for_start_ship < 10)
-								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
-						}
-						//заполняем столбец левее
-						if (y_rand_for_start_ship > 1) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-							b1[x_rand_for_start_ship - 2][y_rand_for_start_ship - 1] = symbols[1];
-						}
-						//заполняем столбец правее
-						if (y_rand_for_start_ship < 10) {
-							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
-							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-							b1[x_rand_for_start_ship - 2][y_rand_for_start_ship + 1] = symbols[1];
-						}
-						flag = true;
-						ship_count--;
-						cout << "3 palub ship is bilding!" << endl;
-					}
-				}
-			}
-		} while (flag != true);
-		flag = false;
-	} while (ship_count > 7);
-	show_ground(b1);
-	//влево 3 2х палубных
-	do {
-		do
-		{
-			//координаты стартовой точки корабля
-			int x_rand_for_start_ship = rand() % 11;
-			int y_rand_for_start_ship = rand() % 11;
-			//направление построение(1 = влево или 0 = вверх)
-			int dir = rand() % 2;
-			cout << "2 palubi: ";
-			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
-			if (chek_random_up_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-				if (chek_random_up_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-					//постраение корабля
-					b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-					b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[0];
-					//постраение области вокруг коробля
-						//заполняем строчку выше
-					if (x_rand_for_start_ship - 1 > 1) {
-						b1[x_rand_for_start_ship - 2][y_rand_for_start_ship] = symbols[1];
-						if (y_rand_for_start_ship > 1)
-							b1[x_rand_for_start_ship - 2][y_rand_for_start_ship - 1] = symbols[1];
-						if (y_rand_for_start_ship < 10)
-							b1[x_rand_for_start_ship - 2][y_rand_for_start_ship + 1] = symbols[1];
-					}
-					//заполняем строчку ниже
-					if (x_rand_for_start_ship < 10) {
-						b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-						if (y_rand_for_start_ship > 1)
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-						if (y_rand_for_start_ship < 10)
-							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
-					}
-					//заполняем столбец левее
-					if (y_rand_for_start_ship > 1) {
-						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[1];
-						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-					}
-					//заполняем столбец правее
-					if (y_rand_for_start_ship < 10) {
-						b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
-						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-					}
-					flag = true;
-					ship_count--;
-					cout << "2 palub ship is bilding!" << endl;
-				}
-			}
-		} while (flag != true);
-		flag = false;
-	} while (ship_count > 4);
-	show_ground(b1);
-	//влево 4 1о палубных
-	do {
-		do
-		{
-			//координаты стартовой точки корабля
-			int x_rand_for_start_ship = rand() % 11;
-			int y_rand_for_start_ship = rand() % 11;
-			//направление построение(1 = влево или 0 = вверх)
-			int dir = rand() % 2;
-			cout << "1 paluba: ";
-			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl;
-			if (chek_random_up_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
-				//постраение корабля
-				b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
-				//постраение области вокруг коробля
-					//заполняем строчку выше
-				if (x_rand_for_start_ship > 1) {
-					b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
-					if (y_rand_for_start_ship > 1)
-						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
-					if (y_rand_for_start_ship < 10)
-						b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
-				}
-				//заполняем строчку ниже
-				if (x_rand_for_start_ship < 10) {
-					b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
-					if (y_rand_for_start_ship > 1)
-						b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
-					if (y_rand_for_start_ship < 10)
-						b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
-				}
-				//заполняем столбец левее
-				if (y_rand_for_start_ship > 1) {
-					b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[1];
-				}
-				//заполняем столбец правее
-				if (y_rand_for_start_ship < 10) {
-					b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
-				}
-				flag = true;
-				ship_count--;
-				cout << "1 palub ship is bilding!" << endl;
-			}
-		} while (flag != true);
-		flag = false;
-	} while (ship_count > 0);
-	//cout << "flag = " << flag << endl;
-	show_ground(b1);
-}
-
 void fill_ground_random(char b1[][widght]) {
 	system("cls");
 	bool flag = 0;
@@ -1229,6 +752,156 @@ void fill_ground_random(char b1[][widght]) {
 			show_ground(b1);
 		} //вверх
 	} while (ship_count > 0);
-
+	system("pause");
 }
 
+void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	if (x_start == x_finish) {
+		//зачистить старый корабль
+		for (int i = x_start, j = y_start; j < y_finish; j++) {
+			b1[i][j] = space;
+		}
+		//нарисовать новый корабль
+		x_start++;
+		x_finish = x_start;
+		for (int i = x_start, j = y_start; j < y_finish; j++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+	else {
+		//зачистить старый корабль
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = space;
+		}
+		//нарисовать новый корабль
+		x_start++;
+		x_finish++;
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+}
+void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	if (x_start == x_finish) {
+		for (int i = x_start, j = y_start; j < y_finish; j++) {
+			b1[i][j] = space;
+		}
+		x_start--;
+		x_finish = x_start;
+		for (int i = x_start, j = y_start; j < y_finish; j++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+	else {
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = space;
+		}
+		//нарисовать новый корабль
+		x_start--;
+		x_finish--;
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+}
+void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	if (x_start == x_finish) {
+		b1[x_start][y_start] = ' ';
+		y_start++;
+		y_finish++;
+		for (int i = x_start, j = y_start; j < y_finish; j++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+	else {
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = space;
+		}
+		//нарисовать новый корабль
+		y_start++;
+		y_finish = y_start;
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+}
+void dir_left(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	if (x_start == x_finish) {
+		b1[x_finish][y_finish - 1] = ' ';
+		y_start--;
+		y_finish--;
+		for (int i = x_start, j = y_start; j < y_finish; j++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+	else {
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = space;
+		}
+		//нарисовать новый корабль
+		y_start--;
+		y_finish = y_start;
+		for (int i = x_start, j = y_start; i < x_finish; i++) {
+			b1[i][j] = symbols[0];
+		}
+		show_ground(b1);
+	}
+}
+
+
+void fill_ground_player(char b1[][widght]) {
+	system("cls");
+	char dir;
+	int x_start;
+	int y_start;
+	int x_finish;
+	int y_finish;
+	int x;
+	int y;
+	cout << "choose direction h - horisont v - vertical " << endl;
+	cout << "You can change direction anytime" << endl;
+	do {
+		dir = _getch();
+		if (dir == 'h') {
+			//fill_ground_space(b1);
+			x_start = 1;
+			y_start = 1;
+			for (x = 1, y = 1; y < 4; y++) {
+				b1[x][y] = symbols[0];
+			}
+			x_finish = x;
+			y_finish = y;
+			show_ground(b1);
+		}
+		if (dir == 'v') {
+			//fill_ground_space(b1);
+			x_start = 1;
+			y_start = 1;
+			for (x = 1, y = 1; x < 4; x++) {
+				b1[x][y] = symbols[0];
+			}
+			x_finish = x;
+			y_finish = y;
+			show_ground(b1);
+		}
+		if (dir == 'w') {
+			dir_up(b1, x_start, y_start, x_finish, y_finish);
+		}
+		if (dir == 's') {
+			dir_down(b1, x_start, y_start, x_finish, y_finish);
+		}
+		if (dir == 'a') {
+			dir_left(b1, x_start, y_start, x_finish, y_finish);
+		}
+		if (dir == 'd') {
+			dir_right(b1, x_start, y_start, x_finish, y_finish);
+		}
+	} while (dir != 13);
+}
