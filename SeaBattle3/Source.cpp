@@ -839,8 +839,8 @@ void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 		//нарисовать новый корабль
 		x_start++;
 		x_finish++;
-		//&& b1[x_start][y_start] != symbols[1] 
-		if (x_finish < widght + 1 && b1[x_finish - 1][y_finish] != symbols[1]) {//условия, что бы не заходили за нижнюю границу горизонтальный корабль x_finish < widght + 1
+		//условия, что бы не заходили за нижнюю границу горизонтальный корабль x_finish < widght + 1
+		if (x_finish < widght + 1 && b1[x_finish - 1][y_finish] != symbols[1]) {
 			for (int i = x_start, j = y_start; i < x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
@@ -857,13 +857,14 @@ void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 	}
 }
 void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
-	if (x_start == x_finish) {
+	if (x_start == x_finish) {//выбор направления horizont
 		for (int i = x_start, j = y_start; j < y_finish; j++) {
 			b1[i][j] = space;
 		}
+		//нарисовать новый корабль
 		x_start--;
 		x_finish = x_start;
-		if (x_start > 0 && b1[x_start][y_start] != symbols[1] && b1[x_finish][y_finish] != symbols[1]) {
+		if (x_start > 0 && b1[x_start+1][y_start] != symbols[1] && b1[x_finish+1][y_finish] != symbols[1]) {
 			for (int i = x_start, j = y_start; j < y_finish; j++) {
 				b1[i][j] = symbols[0];
 			}
@@ -878,7 +879,7 @@ void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y
 			show_ground(b1);
 		}
 	}
-	else {
+	else {//выбор направления vertical
 		for (int i = x_start, j = y_start; i < x_finish; i++) {
 			b1[i][j] = space;
 		}
@@ -899,15 +900,14 @@ void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y
 			}
 			show_ground(b1);
 		}
-
 	}
 }
 void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
-	if (x_start == x_finish) {
+	if (x_start == x_finish) {//выбор направления horizont
 		b1[x_start][y_start] = space;
 		y_start++;
 		y_finish++;
-		if (y_finish < widght + 1) {
+		if (y_finish < widght + 1 && b1[x_finish][y_finish-1] != symbols[1]) {
 			for (int i = x_start, j = y_start; j < y_finish; j++) {
 				b1[i][j] = symbols[0];
 			}
@@ -921,14 +921,14 @@ void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int
 		}
 
 	}
-	else {
+	else {//выбор направления vertical
 		for (int i = x_start, j = y_start; i < x_finish; i++) {
 			b1[i][j] = space;
 		}
 		//нарисовать новый корабль
 		y_start++;
 		y_finish = y_start;
-		if (y_start < widght) {
+		if (y_start < widght && b1[x_finish - 1][y_finish] != symbols[1] && b1[x_start - 1][y_start] != symbols[1]) {
 			for (int i = x_start, j = y_start; i < x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
@@ -946,7 +946,7 @@ void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int
 	}
 }
 void dir_left(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
-	if (x_start == x_finish) {
+	if (x_start == x_finish) {//выбор направления horizont
 		b1[x_finish][y_finish - 1] = space;
 		y_start--;
 		y_finish--;
@@ -962,7 +962,7 @@ void dir_left(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 			b1[x_finish][y_finish - 1] = symbols[0];
 		}
 	}
-	else {
+	else {//выбор направления vertical
 		for (int i = x_start, j = y_start; i < x_finish; i++) {
 			b1[i][j] = space;
 		}
@@ -989,29 +989,40 @@ void fill_det_around_ship(char b1[][widght]) {
 	for (int i = 0; i < widght; i++) {
 		for (int j = 0; j < widght; j++) {
 			if (b1[i][j] == symbols[0]) {
-				if (i + 1 > 0 && i + 1 < 10 && j + 1 > 0 && j + 1 < 10) {
-					b1[i + 1][j + 1] = symbols[1];
-				}
-				if (i - 1 > 0 && i - 1 < widght && j - 1 > 0 && j - 1 < widght) {
-					b1[i - 1][j - 1] = symbols[1];
-				}
-				if (i + 1 > 0 && i + 1 < 10 && j - 1 > 0 && j - 1 < widght) {
-					b1[i + 1][j - 1] = symbols[1];
-				}
-				if (i - 1 > 0 && i - 1 < widght && j + 1 > 0 && j + 1 < 10) {
-					b1[i - 1][j + 1] = symbols[1];
-				}
-
+				//if (i + 1 > 0 && i + 1 < 10 && j + 1 > 0 && j + 1 < 10) {
+				//	b1[i + 1][j + 1] = symbols[1];
+				//}
+				//if (i - 1 > 0 && i - 1 < widght && j - 1 > 0 && j - 1 < widght) {
+				//	b1[i - 1][j - 1] = symbols[1];
+				//}
+				//if (i + 1 > 0 && i + 1 < 10 && j - 1 > 0 && j - 1 < widght) {
+				//	b1[i + 1][j - 1] = symbols[1];
+				//}
+				//if (i - 1 > 0 && i - 1 < widght && j + 1 > 0 && j + 1 < 10) {
+				//	b1[i - 1][j + 1] = symbols[1];
+				//}
+				//нижняя граница
 				if (b1[i + 1][j] != symbols[0] && i + 1 > 0 && i + 1 < widght) {
 					b1[i + 1][j] = symbols[1];
+					if(j + 1 < widght)
+						b1[i + 1][j + 1] = symbols[1];//точка правее нижней границы
+					if(j - 1 > 0)
+						b1[i + 1][j - 1] = symbols[1];//точка левее нижней границы
 				}
+				//верхняя граница заполняется точками
 				if (b1[i - 1][j] != symbols[0] && i - 1 > 0 && i - 1 < widght) {
 					b1[i - 1][j] = symbols[1];
+					if (j + 1 < widght)
+						b1[i - 1][j + 1] = symbols[1];//точка правее верхней границы
+					if (j - 1 > 0)
+						b1[i - 1][j - 1] = symbols[1];//точка левее верхней границы
 				}
+				//правая граница заполняется точками
 				if (b1[i][j + 1] != symbols[0] && j + 1 > 0 && j + 1 < widght) {
 					b1[i][j + 1] = symbols[1];
 				}
-				if (b1[i][j - 1] != symbols[0] & j - 1 > 0 && j - 1 < widght) {
+				//левая граница заполняется точками
+				if (b1[i][j - 1] != symbols[0] && j - 1 > 0 && j - 1 < widght) {
 					b1[i][j - 1] = symbols[1];
 				}
 			}
