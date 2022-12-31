@@ -1057,15 +1057,15 @@ void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 	}
 	else {//выбор направления vertical
 		//зачистить старый корабль
-		for (int i = x_start, j = y_start; i < x_finish; i++) {
+		for (int i = x_start, j = y_start; i <= x_finish; i++) {
 			b1[i][j] = space;
 		}
 		//нарисовать новый корабль
 		x_start++;
 		x_finish++;
 		//условия, что бы не заходили за нижнюю границу горизонтальный корабль x_finish < widght + 1
-		if (x_finish < widght + 1 && b1[x_finish - 1][y_finish] != symbols[1]) {
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+		if (x_finish < widght && b1[x_finish][y_finish] != symbols[1]) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1073,7 +1073,7 @@ void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 		else{
 			x_start--;
 			x_finish--;
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1104,14 +1104,14 @@ void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y
 		}
 	}
 	else {//выбор направления vertical
-		for (int i = x_start, j = y_start; i < x_finish; i++) {
+		for (int i = x_start, j = y_start; i <= x_finish; i++) {
 			b1[i][j] = space;
 		}
 		//нарисовать новый корабль
 		x_start--;
 		x_finish--;
 		if (x_start > 0 && b1[x_start][y_start] != symbols[1]) {
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1119,7 +1119,7 @@ void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y
 		else {
 			x_start++;
 			x_finish++;
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1155,14 +1155,14 @@ void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int
 
 	}
 	else {//выбор направления vertical
-		for (int i = x_start, j = y_start; i < x_finish; i++) {
+		for (int i = x_start, j = y_start; i <= x_finish; i++) {
 			b1[i][j] = space;
 		}
 		//нарисовать новый корабль
 		y_start++;
 		y_finish = y_start;
-		if (y_start < widght && b1[x_finish - 1][y_finish] != symbols[1] && b1[x_start - 1][y_start] != symbols[1]) {
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+		if (y_start < widght && b1[x_finish][y_finish] != symbols[1] && b1[x_start][y_start] != symbols[1]) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1170,7 +1170,7 @@ void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int
 		else {
 			y_start--;
 			y_finish = y_start;
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1183,7 +1183,7 @@ void dir_left(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 		b1[x_finish][y_finish] = space;
 		y_start--;
 		y_finish--;
-		if (y_start > 0) {
+		if (y_start > 0 && b1[x_start][y_start] != symbols[1]) {
 			//for (int i = x_start, j = y_start; j <= y_finish; j++) {
 			//	b1[i][j] = symbols[0];
 			//}
@@ -1197,14 +1197,14 @@ void dir_left(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 		}
 	}
 	else {//выбор направления vertical
-		for (int i = x_start, j = y_start; i < x_finish; i++) {
+		for (int i = x_start, j = y_start; i <= x_finish; i++) {
 			b1[i][j] = space;
 		}
 		//нарисовать новый корабль
 		y_start--;
 		y_finish = y_start;
-		if (y_finish > 0) {
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+		if (y_finish > 0 && b1[x_start][y_start] != symbols[1] && b1[x_finish][y_finish] != symbols[1]) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1212,7 +1212,7 @@ void dir_left(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 		else {
 			y_start++;
 			y_finish = y_start;
-			for (int i = x_start, j = y_start; i < x_finish; i++) {
+			for (int i = x_start, j = y_start; i <= x_finish; i++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -1266,52 +1266,166 @@ void fill_det_around_ship(char b1[][widght]) {
 	system("pause");
 }
 
-void tap_ship_three_part_random_right_horizont(char b1[][widght], int &x_start, int &y_start, int &x_finish, int &y_finish) {
+void tap_ship_four_part_random_horizont(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
 	bool flag = false;
 	int x;
 	int y;
 	do {
 		x = rand() % 11;
 		y = rand() % 11;
-		if (chek_random_right_first(b1, x, y)) {
-			if (chek_random_right_second(b1, x, y)) {
-				if (chek_random_right_therd(b1, x, y)) {
+		if (chek_random_left_first(b1, x, y)) {
+			if (chek_random_left_second(b1, x, y)) {
+				if (chek_random_left_therd(b1, x, y)) {
+					if (chek_random_left_fourth(b1, x, y)) {
+						//постраение корабля
+						b1[x][y] = symbols[0];
+						b1[x][y - 1] = symbols[0];
+						b1[x][y - 2] = symbols[0];
+						b1[x][y - 3] = symbols[0];
+						flag = true;
+					}
+				}
+			}
+		}
+	} while (flag != true);
+	x_start = x;
+	y_start = y - 3;
+	x_finish = x;
+	y_finish = y;
+}
+void tap_ship_four_part_random_vertical(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_up_first(b1, x, y)) {
+			if (chek_random_up_second(b1, x, y)) {
+				if (chek_random_up_therd(b1, x, y)) {
+					if (chek_random_up_fourth(b1, x, y)) {
+						//постраение корабля
+						b1[x][y] = symbols[0];
+						b1[x - 1][y] = symbols[0];
+						b1[x - 2][y] = symbols[0];
+						b1[x - 3][y] = symbols[0];
+						flag = true;
+					}
+				}
+			}
+		}
+	} while (flag != true);
+	x_start = x - 3;
+	y_start = y;
+	x_finish = x;
+	y_finish = y;
+}
+void tap_ship_three_part_random_horizont(char b1[][widght], int &x_start, int &y_start, int &x_finish, int &y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_left_first(b1, x, y)) {
+			if (chek_random_left_second(b1, x, y)) {
+				if (chek_random_left_therd(b1, x, y)) {
 					//постраение корабля
 					b1[x][y] = symbols[0];
-					b1[x][y + 1] = symbols[0];
-					b1[x][y + 2] = symbols[0];
+					b1[x][y - 1] = symbols[0];
+					b1[x][y - 2] = symbols[0];
 					flag = true;
 				}
 			}
+		}
+	} while (flag != true);
+	x_start = x;
+	y_start = y - 2;
+	x_finish = x;
+	y_finish = y;
+}
+void tap_ship_three_part_random_vertical(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_up_first(b1, x, y)) {
+			if (chek_random_up_second(b1, x, y)) {
+				if (chek_random_up_therd(b1, x, y)) {
+					//постраение корабля
+					b1[x][y] = symbols[0];
+					b1[x - 1][y] = symbols[0];
+					b1[x - 2][y] = symbols[0];
+					flag = true;
+				}
+			}
+		}
+	} while (flag != true);
+	x_start = x - 2;
+	y_start = y;
+	x_finish = x;
+	y_finish = y;
+}
+void tap_ship_two_part_random_horizont(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_left_first(b1, x, y)) {
+			if (chek_random_left_second(b1, x, y)) {
+				//постраение корабля
+				b1[x][y] = symbols[0];
+				b1[x][y - 1] = symbols[0];
+				flag = true;
+			}
+		}
+	} while (flag != true);
+	x_start = x;
+	y_start = y - 1;
+	x_finish = x;
+	y_finish = y;
+}
+void tap_ship_two_part_random_vertical(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_up_first(b1, x, y)) {
+			if (chek_random_up_second(b1, x, y)) {
+				//постраение корабля
+				b1[x][y] = symbols[0];
+				b1[x - 1][y] = symbols[0];
+				flag = true;
+			}
+		}
+	} while (flag != true);
+	x_start = x - 1;
+	y_start = y;
+	x_finish = x;
+	y_finish = y;
+}
+void tap_ship_one_part_random_vertical(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_up_first(b1, x, y)) {
+			//постраение корабля
+			b1[x][y] = symbols[0];
+			flag = true;
 		}
 	} while (flag != true);
 	x_start = x;
 	y_start = y;
 	x_finish = x;
-	y_finish = y + 2;
-}
-void tap_ship_three_part_random_down_vertical(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
-	bool flag = false;
-	int x;
-	int y;
-	do {
-		x = rand() % 11;
-		y = rand() % 11;
-		if (chek_random_down_first(b1, x, y)) {
-			if (chek_random_down_second(b1, x, y)) {
-				if (chek_random_down_therd(b1, x, y)) {
-					//постраение корабля
-					b1[x][y] = symbols[0];
-					b1[x + 1][y] = symbols[0];
-					b1[x + 2][y] = symbols[0];
-					flag = true;
-				}
-			}
-		}
-	} while (flag != true);
-	x_start = x;
-	y_start = y;
-	x_finish = x + 2;
 	y_finish = y;
 }
 
@@ -1328,37 +1442,27 @@ void fill_ground_player(char b1[][widght]) {
 	int count_thre = 2;
 	int count_two = 3;
 	int count_one = 4;
+	//построение 4 палубных кораблей
 	cout << "choose direction h - horisont v - vertical " << endl;
 	cout << "You can change direction anytime." << endl;
 	do {
 		dir = _getch();
 		if (dir == 'h') {
 			fill_ground_space(b1);
-			x_start = 1;
-			y_start = 1;
-			x = x_start;
-			y = y_start;
-			for (; y <= 4; y++) {//так как после прохождения последнего цикла y еще раз увеличивается
-				b1[x][y] = symbols[0];
-			}
-			x_finish = x;
-			y_finish = y - 1;
-			//cout << "Start det: b1[" << x_start << "][" << y_start << "]" << endl;
-			//cout << "Finish det: b1[" << x_finish << "][" << y_finish << "]" << endl;
-			system("pause");
+			x_start = 0;
+			y_start = 0;
+			x_finish = 0;
+			y_finish = 0;
+			tap_ship_four_part_random_horizont(b1, x_start, y_start, x_finish, y_finish);
 			show_ground(b1);
 		}
 		if (dir == 'v') {
 			fill_ground_space(b1);
-			x_start = 1;
-			y_start = 1;
-			x = x_start;
-			y = y_start;
-			for (x = 1, y = 1; x < 5; x++) {
-				b1[x][y] = symbols[0];
-			}
-			x_finish = x;
-			y_finish = y;
+			x_start = 0;
+			y_start = 0;
+			x_finish = 0;
+			y_finish = 0;
+			tap_ship_four_part_random_vertical(b1, x_start, y_start, x_finish, y_finish);
 			show_ground(b1);
 		}
 		if (dir == 'w') {
@@ -1378,43 +1482,136 @@ void fill_ground_player(char b1[][widght]) {
 	copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
 	show_ground(b1);
 	dir = ' ';
-	cout << "choose direction h - horisont v - vertical " << endl;
-	cout << "You can change direction anytime." << endl;
+	//построение 3 палубных кораблей
 	do {
-		dir = _getch();
-		if (dir == 'h') {
-			//рандомные точки для выбора стартовой позиции корабля
-			copy_ground(temp, b1);
-			x_start = 0;
-			y_start = 0;
-			x_finish = 0;
-			y_finish = 0;
-			tap_ship_three_part_random_right_horizont(b1, x_start, y_start, x_finish, y_finish);
-			show_ground(b1);
-		}
-		if (dir == 'v') {
-			copy_ground(temp, b1);
-			x_start = 0;
-			y_start = 0;
-			x_finish = 0;
-			y_finish = 0;
-			tap_ship_three_part_random_down_vertical(b1, x_start, y_start, x_finish, y_finish);
-			show_ground(b1);
-		}
-		if (dir == 'w') {
-			dir_up(b1, x_start, y_start, x_finish, y_finish);
-		}
-		if (dir == 's') {
-			dir_down(b1, x_start, y_start, x_finish, y_finish);
-		}
-		if (dir == 'a') {
-			dir_left(b1, x_start, y_start, x_finish, y_finish);
-		}
-		if (dir == 'd') {
-			dir_right(b1, x_start, y_start, x_finish, y_finish);
-		}
-	} while (dir != 13);
-	fill_det_around_ship(b1);//рисуем точки вокруг корабля
-	copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
-	show_ground(b1);
+		cout << "choose direction h - horisont v - vertical " << endl;
+		cout << "You can change direction anytime." << endl;
+		do {
+			dir = _getch();
+			if (dir == 'h') {
+				//рандомные точки для выбора стартовой позиции корабля
+				copy_ground(temp, b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_three_part_random_horizont(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'v') {
+				copy_ground(temp, b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_three_part_random_vertical(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'w') {
+				dir_up(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 's') {
+				dir_down(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'a') {
+				dir_left(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'd') {
+				dir_right(b1, x_start, y_start, x_finish, y_finish);
+			}
+		} while (dir != 13);
+		count_thre--;
+		fill_det_around_ship(b1);//рисуем точки вокруг корабля
+		copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
+		show_ground(b1);
+	} while (count_thre > 0);
+	dir = ' ';
+	//построение 2 палубных кораблей
+	do {
+		cout << "choose direction h - horisont v - vertical " << endl;
+		cout << "You can change direction anytime." << endl;
+		do {
+			dir = _getch();
+			if (dir == 'h') {
+				//рандомные точки для выбора стартовой позиции корабля
+				copy_ground(temp, b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_two_part_random_horizont(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'v') {
+				copy_ground(temp, b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_two_part_random_vertical(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'w') {
+				dir_up(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 's') {
+				dir_down(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'a') {
+				dir_left(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'd') {
+				dir_right(b1, x_start, y_start, x_finish, y_finish);
+			}
+		} while (dir != 13);
+		count_two--;
+		fill_det_around_ship(b1);//рисуем точки вокруг корабля
+		copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
+		show_ground(b1);
+	} while (count_two > 0);
+	dir = ' ';
+	//построение 1 палубных кораблей
+	do {
+		cout << "choose direction h - horisont v - vertical " << endl;
+		cout << "You can change direction anytime." << endl;
+		do {
+			dir = _getch();
+			if (dir == 'h') {
+				//рандомные точки для выбора стартовой позиции корабля
+				copy_ground(temp, b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_one_part_random_vertical(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'v') {
+				copy_ground(temp, b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_one_part_random_vertical(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'w') {
+				dir_up(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 's') {
+				dir_down(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'a') {
+				dir_left(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'd') {
+				dir_right(b1, x_start, y_start, x_finish, y_finish);
+			}
+		} while (dir != 13);
+		count_two--;
+		fill_det_around_ship(b1);//рисуем точки вокруг корабля
+		copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
+		show_ground(b1);
+	} while (count_one > 0);
+	dir = ' ';
 }
