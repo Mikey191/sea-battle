@@ -95,6 +95,7 @@ void show_ground(char b1[][widght]) {
 	}
 	//system("pause");
 }
+
 bool chek_random_left_first(char b1[][widght],const int &x_rand_for_start_ship,const int &y_rand_for_start_ship) {
 	bool chek = false;
 	if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0] &&
@@ -797,6 +798,230 @@ bool chek_no_letters(char b1[][widght], int i, int j) {
 	return chek;
 }
 
+bool chek_random_right_first(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[2]
+		) chek = true;
+	return chek;
+}
+bool chek_random_right_second(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != numbers[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != letters[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != symbols[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != symbols[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] != symbols[2]
+		) chek = true;
+	return chek;
+}
+bool chek_random_right_therd(char b1[][widght], int x_rand_for_start_ship, int y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != numbers[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != letters[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != symbols[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != symbols[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 2] != symbols[2]
+		) chek = true;
+	return chek;
+}
+bool chek_random_right_fourth(char b1[][widght], int x_rand_for_start_ship, int y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != numbers[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != letters[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != symbols[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != symbols[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship + 3] != symbols[2]
+		) chek = true;
+	return chek;
+}
+bool chek_random_down_first(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != numbers[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[2] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[3] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[4] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[5] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[6] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[7] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[8] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != letters[9] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[0] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[1] &&
+		b1[x_rand_for_start_ship][y_rand_for_start_ship] != symbols[2]
+		) chek = true;
+	return chek;
+}
+bool chek_random_down_second(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[0] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[1] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[2] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[3] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[4] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[5] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[6] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[7] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[8] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != numbers[9] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[0] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[1] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[2] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[3] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[4] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[5] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[6] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[7] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[8] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != letters[9] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != symbols[0] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != symbols[1] &&
+		b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] != symbols[2]
+		) chek = true;
+	return chek;
+}
+bool chek_random_down_therd(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[0] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[1] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[2] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[3] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[4] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[5] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[6] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[7] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[8] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != numbers[9] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[0] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[1] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[2] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[3] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[4] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[5] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[6] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[7] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[8] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != letters[9] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != symbols[0] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != symbols[1] &&
+		b1[x_rand_for_start_ship + 2][y_rand_for_start_ship] != symbols[2]
+		) chek = true;
+	return chek;
+}
+bool chek_random_down_fourth(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship) {
+	bool chek = false;
+	if (b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[0] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[1] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[2] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[3] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[4] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[5] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[6] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[7] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[8] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != numbers[9] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[0] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[1] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[2] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[3] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[4] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[5] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[6] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[7] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[8] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != letters[9] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != symbols[0] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != symbols[1] &&
+		b1[x_rand_for_start_ship + 3][y_rand_for_start_ship] != symbols[2]
+		) chek = true;
+	return chek;
+}
 void copy_ground(char b1[][widght], char b2[][widght]) {
 	for (int i = 0; i < widght; i++) {
 		for (int j = 0; j < widght; j++) {
@@ -804,11 +1029,10 @@ void copy_ground(char b1[][widght], char b2[][widght]) {
 		}
 	}
 }
-
 void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
 	if (x_start == x_finish) {//выбор направления horizont
 		//зачистить старый корабль
-		for (int i = x_start, j = y_start; j < y_finish; j++) {
+		for (int i = x_start, j = y_start; j <= y_finish; j++) {
 			b1[i][j] = space;
 		}
 		//нарисовать новый корабль
@@ -816,7 +1040,7 @@ void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 		x_finish = x_start;
 		//условия, что бы не заходили за нижнюю границу горизонтальный корабль x_start < widght и на линии ниже не было '.'
 		if (x_start < widght && b1[x_start][y_start] != symbols[1] && b1[x_finish][y_finish] != symbols[1]) {
-			for (int i = x_start, j = y_start; j < y_finish; j++) {
+			for (int i = x_start, j = y_start; j <= y_finish; j++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -824,7 +1048,7 @@ void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 		else {
 			x_start--;
 			x_finish = x_start;
-			for (int i = x_start, j = y_start; j < y_finish; j++) {
+			for (int i = x_start, j = y_start; j <= y_finish; j++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -858,14 +1082,14 @@ void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int&
 }
 void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
 	if (x_start == x_finish) {//выбор направления horizont
-		for (int i = x_start, j = y_start; j < y_finish; j++) {
+		for (int i = x_start, j = y_start; j <= y_finish; j++) {
 			b1[i][j] = space;
 		}
 		//нарисовать новый корабль
 		x_start--;
 		x_finish = x_start;
-		if (x_start > 0 && b1[x_start+1][y_start] != symbols[1] && b1[x_finish+1][y_finish] != symbols[1]) {
-			for (int i = x_start, j = y_start; j < y_finish; j++) {
+		if (x_start > 0 && b1[x_start][y_start] != symbols[1] && b1[x_finish][y_finish] != symbols[1]) {
+			for (int i = x_start, j = y_start; j <= y_finish; j++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -873,7 +1097,7 @@ void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y
 		else{
 			x_start++;
 			x_finish = x_start;
-			for (int i = x_start, j = y_start; j < y_finish; j++) {
+			for (int i = x_start, j = y_start; j <= y_finish; j++) {
 				b1[i][j] = symbols[0];
 			}
 			show_ground(b1);
@@ -903,14 +1127,23 @@ void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y
 	}
 }
 void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	//cout << "Dir right;" << endl;
+	//cout << "Start det: b1[" << x_start << "][" << y_start << "]" << endl;
+	//cout << "Finish det: b1[" << x_finish << "][" << y_finish << "]" << endl;
+	//system("pause");
 	if (x_start == x_finish) {//выбор направления horizont
 		b1[x_start][y_start] = space;
 		y_start++;
 		y_finish++;
-		if (y_finish < widght + 1 && b1[x_finish][y_finish-1] != symbols[1]) {
-			for (int i = x_start, j = y_start; j < y_finish; j++) {
-				b1[i][j] = symbols[0];
-			}
+		//cout << "befor dir right;" << endl;
+		//cout << "Start det: b1[" << x_start << "][" << y_start << "]" << endl;
+		//cout << "Finish det: b1[" << x_finish << "][" << y_finish << "]" << endl;
+		//system("pause");
+		if (y_finish < widght && b1[x_finish][y_finish] != symbols[1]) {
+			//for (int i = x_start, j = y_start; j < y_finish; j++) {
+			//	b1[i][j] = symbols[0];
+			//}
+			b1[x_finish][y_finish] = symbols[0];
 			show_ground(b1);
 		}
 		else {
@@ -947,19 +1180,20 @@ void dir_right(char b1[][widght], int& x_start, int& y_start, int& x_finish, int
 }
 void dir_left(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
 	if (x_start == x_finish) {//выбор направления horizont
-		b1[x_finish][y_finish - 1] = space;
+		b1[x_finish][y_finish] = space;
 		y_start--;
 		y_finish--;
 		if (y_start > 0) {
-			for (int i = x_start, j = y_start; j < y_finish; j++) {
-				b1[i][j] = symbols[0];
-			}
+			//for (int i = x_start, j = y_start; j <= y_finish; j++) {
+			//	b1[i][j] = symbols[0];
+			//}
+			b1[x_start][y_start] = symbols[0];
 			show_ground(b1);
 		}
 		else {
 			y_start++;
 			y_finish++;
-			b1[x_finish][y_finish - 1] = symbols[0];
+			b1[x_finish][y_finish] = symbols[0];
 		}
 	}
 	else {//выбор направления vertical
@@ -1032,6 +1266,55 @@ void fill_det_around_ship(char b1[][widght]) {
 	system("pause");
 }
 
+void tap_ship_three_part_random_right_horizont(char b1[][widght], int &x_start, int &y_start, int &x_finish, int &y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_right_first(b1, x, y)) {
+			if (chek_random_right_second(b1, x, y)) {
+				if (chek_random_right_therd(b1, x, y)) {
+					//постраение корабля
+					b1[x][y] = symbols[0];
+					b1[x][y + 1] = symbols[0];
+					b1[x][y + 2] = symbols[0];
+					flag = true;
+				}
+			}
+		}
+	} while (flag != true);
+	x_start = x;
+	y_start = y;
+	x_finish = x;
+	y_finish = y + 2;
+}
+void tap_ship_three_part_random_down_vertical(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
+	bool flag = false;
+	int x;
+	int y;
+	do {
+		x = rand() % 11;
+		y = rand() % 11;
+		if (chek_random_down_first(b1, x, y)) {
+			if (chek_random_down_second(b1, x, y)) {
+				if (chek_random_down_therd(b1, x, y)) {
+					//постраение корабля
+					b1[x][y] = symbols[0];
+					b1[x + 1][y] = symbols[0];
+					b1[x + 2][y] = symbols[0];
+					flag = true;
+				}
+			}
+		}
+	} while (flag != true);
+	x_start = x;
+	y_start = y;
+	x_finish = x + 2;
+	y_finish = y;
+}
+
 void fill_ground_player(char b1[][widght]) {
 	system("cls");
 	char temp[widght][widght];
@@ -1055,11 +1338,14 @@ void fill_ground_player(char b1[][widght]) {
 			y_start = 1;
 			x = x_start;
 			y = y_start;
-			for (; y < 5; y++) {
+			for (; y <= 4; y++) {//так как после прохождения последнего цикла y еще раз увеличивается
 				b1[x][y] = symbols[0];
 			}
 			x_finish = x;
-			y_finish = y;
+			y_finish = y - 1;
+			//cout << "Start det: b1[" << x_start << "][" << y_start << "]" << endl;
+			//cout << "Finish det: b1[" << x_finish << "][" << y_finish << "]" << endl;
+			system("pause");
 			show_ground(b1);
 		}
 		if (dir == 'v') {
@@ -1099,32 +1385,20 @@ void fill_ground_player(char b1[][widght]) {
 		if (dir == 'h') {
 			//рандомные точки для выбора стартовой позиции корабля
 			copy_ground(temp, b1);
-			do {
-				x_start = rand() % 11;
-				y_start = rand() % 11;
-			} while (b1[x_start][y_start] != space && y_start + 3 < 11);
-			x = x_start;
-			y = y_start;
-			for (; y < y_start + 3; y++) {
-				b1[x][y] = symbols[0];
-			}
-			x_finish = x;
-			y_finish = y;
+			x_start = 0;
+			y_start = 0;
+			x_finish = 0;
+			y_finish = 0;
+			tap_ship_three_part_random_right_horizont(b1, x_start, y_start, x_finish, y_finish);
 			show_ground(b1);
 		}
 		if (dir == 'v') {
 			copy_ground(temp, b1);
-			do {
-				x_start = rand() % 11;
-				y_start = rand() % 11;
-			} while (b1[x_start][y_start] != space && y_start + 3 < 11);
-			x = x_start;
-			y = y_start;
-			for (; x < x_start + 3; x++) {
-				b1[x][y] = symbols[0];
-			}
-			x_finish = x;
-			y_finish = y;
+			x_start = 0;
+			y_start = 0;
+			x_finish = 0;
+			y_finish = 0;
+			tap_ship_three_part_random_down_vertical(b1, x_start, y_start, x_finish, y_finish);
 			show_ground(b1);
 		}
 		if (dir == 'w') {
