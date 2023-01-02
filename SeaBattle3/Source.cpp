@@ -1428,6 +1428,15 @@ void tap_ship_one_part_random_vertical(char b1[][widght], int& x_start, int& y_s
 	x_finish = x;
 	y_finish = y;
 }
+int count_ship_part(char b1[][widght]) {
+	int count_part = 0;
+	for (int i = 0; i < widght; i++) {
+		for (int j = 0; j < widght; j++) {
+			if (b1[i][j] == symbols[0]) count_part++;
+		}
+	}
+	return count_part;
+}
 
 void fill_ground_player(char b1[][widght]) {
 	system("cls");
@@ -1443,45 +1452,49 @@ void fill_ground_player(char b1[][widght]) {
 	int count_two = 3;
 	int count_one = 4;
 	//построение 4 палубных кораблей
-	cout << "choose direction h - horisont v - vertical " << endl;
-	cout << "You can change direction anytime." << endl;
 	do {
-		dir = _getch();
-		if (dir == 'h') {
-			fill_ground_space(b1);
-			x_start = 0;
-			y_start = 0;
-			x_finish = 0;
-			y_finish = 0;
-			tap_ship_four_part_random_horizont(b1, x_start, y_start, x_finish, y_finish);
-			show_ground(b1);
-		}
-		if (dir == 'v') {
-			fill_ground_space(b1);
-			x_start = 0;
-			y_start = 0;
-			x_finish = 0;
-			y_finish = 0;
-			tap_ship_four_part_random_vertical(b1, x_start, y_start, x_finish, y_finish);
-			show_ground(b1);
-		}
-		if (dir == 'w') {
-			dir_up(b1, x_start, y_start, x_finish, y_finish);
-		}
-		if (dir == 's') {
-			dir_down(b1, x_start, y_start, x_finish, y_finish);
-		}
-		if (dir == 'a') {
-			dir_left(b1, x_start, y_start, x_finish, y_finish);
-		}
-		if (dir == 'd') {
-			dir_right(b1, x_start, y_start, x_finish, y_finish);
-		}
-	} while (dir != 13);
-	fill_det_around_ship(b1);//рисуем точки вокруг корабля
-	copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
-	show_ground(b1);
-	dir = ' ';
+		cout << "choose direction h - horisont v - vertical " << endl;
+		cout << "You can change direction anytime." << endl;
+		do {
+			dir = _getch();
+			if (dir == 'h') {
+				fill_ground_space(b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_four_part_random_horizont(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'v') {
+				fill_ground_space(b1);
+				x_start = 0;
+				y_start = 0;
+				x_finish = 0;
+				y_finish = 0;
+				tap_ship_four_part_random_vertical(b1, x_start, y_start, x_finish, y_finish);
+				show_ground(b1);
+			}
+			if (dir == 'w') {
+				dir_up(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 's') {
+				dir_down(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'a') {
+				dir_left(b1, x_start, y_start, x_finish, y_finish);
+			}
+			if (dir == 'd') {
+				dir_right(b1, x_start, y_start, x_finish, y_finish);
+			}
+		} while (dir != 13);
+		fill_det_around_ship(b1);//рисуем точки вокруг корабля
+		copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
+		show_ground(b1);
+		dir = ' ';
+		cout << "count_ship_part = " << count_ship_part(b1) << endl;
+	} while (count_ship_part(b1) != 4);
+	
 	//построение 3 палубных кораблей
 	do {
 		cout << "choose direction h - horisont v - vertical " << endl;
@@ -1524,7 +1537,8 @@ void fill_ground_player(char b1[][widght]) {
 		fill_det_around_ship(b1);//рисуем точки вокруг корабля
 		copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
 		show_ground(b1);
-	} while (count_thre > 0);
+		cout << "count_ship_part = " << count_ship_part(b1) << endl;
+	} while (count_ship_part(b1) <= 10);
 	dir = ' ';
 	//построение 2 палубных кораблей
 	do {
@@ -1608,7 +1622,7 @@ void fill_ground_player(char b1[][widght]) {
 				dir_right(b1, x_start, y_start, x_finish, y_finish);
 			}
 		} while (dir != 13);
-		count_two--;
+		count_one--;
 		fill_det_around_ship(b1);//рисуем точки вокруг корабля
 		copy_ground(b1, temp);//сохраняем результат первого корабля в темповый массив
 		show_ground(b1);
