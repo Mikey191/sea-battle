@@ -10,9 +10,11 @@ extern char space;
 extern char numbers[10];
 extern char letters[10];
 extern char symbols[3];
+extern char symbols_for_second_ground[3];
 
 void fill_ground_space(char b1[][widght]);
 void show_ground(char b1[][widght]);
+void show_two_ground(char b1[][widght], char b2[][widght]);
 void copy_ground(char b1[][widght], char b2[][widght]);
 
 bool chek_random_left_first(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship);
@@ -39,3 +41,7 @@ void tap_ship_two_part_random_vertical(char b1[][widght], int& x_start, int& y_s
 void tap_ship_one_part_random_vertical(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish);
 int count_ship_part(char b1[][widght]);
 void fill_ground_player(char b1[][widght]);
+
+void bang_player(char b1[][widght], char b2[][widght]);
+
+void bang_random(char b1[][widght], char b2[][widght]);

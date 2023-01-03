@@ -3,6 +3,7 @@ extern char space = ' ';
 extern char numbers[10] = { '1', '2', '3', '4','5','6','7','8','9','X' };
 extern char letters[10] = { 'a', 'b', 'c', 'd','e','f','j','h','i','j' };
 extern char symbols[3] = { '*', '.', '+' };
+extern char symbols_for_second_ground[3] = { 'x', '.', '0' };
 
 void fill_ground_space(char b1[][widght]) {
 	b1[0][0] = '+';
@@ -27,6 +28,22 @@ void fill_ground_space(char b1[][widght]) {
 
 void show_ground(char b1[][widght]) {
 	system("cls");
+	for (int i = 0; i < widght; i++) {
+		for (int j = 0; j < widght; j++) {
+			cout << b1[i][j] << " ";
+		}cout << endl;
+	}
+}
+void show_two_ground(char b1[][widght], char b2[][widght]) {
+	system("cls");
+	cout << '\t' << "FOR BANG!" << endl;
+	for (int i = 0; i < widght; i++) {
+		for (int j = 0; j < widght; j++) {
+			cout << b2[i][j] << " ";
+		}cout << endl;
+	}
+	cout << endl << endl << endl;
+	cout << '\t' << "YOUR GROUND" << endl;
 	for (int i = 0; i < widght; i++) {
 		for (int j = 0; j < widght; j++) {
 			cout << b1[i][j] << " ";
@@ -1304,4 +1321,38 @@ void fill_ground_player(char b1[][widght]) {
 		cout << "count_ship_part = " << count_ship_part(b1) << endl;
 	} while (count_ship_part(b1) < 20);
 	dir = ' ';
+}
+
+void bang_random(char b_enemy[][widght], char b_player_second[][widght])
+{
+	//условия выполнения рандомного выстрела
+	//1)не должен стрелять по рамкам
+	//2)не должен повторятся выстрел(наверное надо создать темповый массив и записывать выстрелы туда и сравнивать потом с ним
+	//3)не должен стрелять по символам '.', они рисуются на втором поле если ты убил целый корабль, а как проверить корабль ты убил или только попал это вопрос???
+	//есть идея после каждого выстрела проверять на кол-во '*', но тут тоже вопрос, надо выявить одинаковые условия для всех караблей. Например точки вокруг них
+	char temp[widght][widght];
+	fill_ground_space(temp);
+	bool flag = false;
+	//координаты выстрела рандомом
+	//проверка на на symbols_for_second_ground[3] и на повторение
+	do {
+		int x_random_bang = 1 + rand() % 10;
+		int y_random_bang = 1 + rand() % 10;
+		cout << "x_r = " << x_random_bang << endl;
+		cout << "y_r = " << y_random_bang << endl;
+		system("pause");
+		if (b_player_second[x_random_bang][y_random_bang] != symbols_for_second_ground[0] &&
+			b_player_second[x_random_bang][y_random_bang] != symbols_for_second_ground[1] &&
+			b_player_second[x_random_bang][y_random_bang] != symbols_for_second_ground[2]
+			) {
+			if (b_enemy[x_random_bang][y_random_bang] == symbols[0]) {
+				b_player_second[x_random_bang][y_random_bang] = symbols_for_second_ground[0];
+			}
+			else b_player_second[x_random_bang][y_random_bang] = symbols_for_second_ground[2];
+			flag = true;
+		}
+	} while (!flag);
+	show_ground(b_player_second);
+	system("pause");
+	flag = false;
 }
