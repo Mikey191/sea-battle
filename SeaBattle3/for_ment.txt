@@ -94,3 +94,62 @@
 		(x_rand_for_start_ship - 2 > 0)
 		(x_rand_for_start_ship - 1 > 0)
 правее (x_rand_for_start_ship < 10)
+
+
+
+
+
+foo1
+{
+bool flag = false;
+	do
+			{
+				//координаты стартовой точки корабля
+				int x_rand_for_start_ship = rand() % 11;
+				int y_rand_for_start_ship = rand() % 11;
+				cout << "3 palubi: ";
+				cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << endl;
+				if (chek_random_left_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+					if (chek_random_left_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+						if (chek_random_left_therd(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+							//постраение корабля
+							b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
+							//постраение области вокруг коробля
+								//заполняем строчку выше
+							if (x_rand_for_start_ship > 1) {
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
+							}
+							//заполняем строчку ниже
+							if (x_rand_for_start_ship < 10) {
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
+							}
+							//заполняем столбец левее
+							if (y_rand_for_start_ship - 2 > 1) {
+								b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[1];
+								if (x_rand_for_start_ship > 1)
+									b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 3] = symbols[1];
+								if (x_rand_for_start_ship < 10)
+									b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 3] = symbols[1];
+							}
+							//заполняем столбец правее
+							if (y_rand_for_start_ship < 10) {
+								b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
+								if (x_rand_for_start_ship > 1)
+									b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
+								if (x_rand_for_start_ship < 10)
+									b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
+							}
+							flag = true;
+							ship_count--;
+							cout << "3 palub ship is bilding!" << endl;
+						}
+					}
+				}
+			} while (flag != true);
+}

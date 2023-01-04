@@ -1330,17 +1330,15 @@ void bang_random(char b_enemy[][widght], char b_player_second[][widght])
 	//2)не должен повторятся выстрел(наверное надо создать темповый массив и записывать выстрелы туда и сравнивать потом с ним
 	//3)не должен стрелять по символам '.', они рисуются на втором поле если ты убил целый корабль, а как проверить корабль ты убил или только попал это вопрос???
 	//есть идея после каждого выстрела проверять на кол-во '*', но тут тоже вопрос, надо выявить одинаковые условия для всех караблей. Например точки вокруг них
-	char temp[widght][widght];
-	fill_ground_space(temp);
-	bool flag = false;
+	bool flag_2 = false;
 	//координаты выстрела рандомом
 	//проверка на на symbols_for_second_ground[3] и на повторение
 	do {
 		int x_random_bang = 1 + rand() % 10;
 		int y_random_bang = 1 + rand() % 10;
-		cout << "x_r = " << x_random_bang << endl;
-		cout << "y_r = " << y_random_bang << endl;
-		system("pause");
+		//cout << "x_r = " << x_random_bang << endl;
+		//cout << "y_r = " << y_random_bang << endl;
+		//system("pause");
 		if (b_player_second[x_random_bang][y_random_bang] != symbols_for_second_ground[0] &&
 			b_player_second[x_random_bang][y_random_bang] != symbols_for_second_ground[1] &&
 			b_player_second[x_random_bang][y_random_bang] != symbols_for_second_ground[2]
@@ -1349,9 +1347,91 @@ void bang_random(char b_enemy[][widght], char b_player_second[][widght])
 				b_player_second[x_random_bang][y_random_bang] = symbols_for_second_ground[0];
 			}
 			else b_player_second[x_random_bang][y_random_bang] = symbols_for_second_ground[2];
-			flag = true;
+			flag_2 = true;
 		}
-	} while (!flag);
+	} while (!flag_2);
+	show_ground(b_player_second);
+	system("pause");
+	//flag = false;
+}
+
+void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
+	bool flag = false;
+	int count = 0;
+	//нужно наверное добавить массивы с хранящимися координатами например список или вектор где будет хранится информация о координатах и о том, плавает или потоплен
+
+	//первый выстрел рандомом
+	//если попал по части корабля, появляется 4 варианта выстрела дальше
+	//если попал по какому то из направление, стреляет, пока не убьет корабль
+	//если попал в середину, стреляет до промаха, и разворачивает свои выстрелы в противоположенную сторону
+	//cout << "proverka_1_" << endl;
+	do {
+		//проверка поля для выстрелов на крест
+		for (int i = 0; i < widght; i++) {
+			for (int j = 0; j < widght; j++) {
+				//ищем symbols_for_second_ground[0]
+				//cout << "proverka_1.5_" << endl;
+				if (j + 1 < widght &&
+					b_player_second[i][j] == symbols_for_second_ground[0] &&
+					b_player_second[i][j + 1] == space//ячейка правее 
+					) {
+					//cout << "proverka_2_" << endl;
+					if (b_enemy[i][j + 1] == symbols[0]) {
+						b_player_second[i][j + 1] = symbols_for_second_ground[0];
+					}
+					else b_player_second[i][j + 1] = symbols_for_second_ground[2];
+					flag = true;
+					//break;
+				}
+				else if (j - 1 > 1 &&
+					b_player_second[i][j] == symbols_for_second_ground[0] &&
+					b_player_second[i][j - 1] == space//ячейка левее
+					) {
+					//cout << "proverka_3_" << endl;
+					if (b_enemy[i][j - 1] == symbols[0]) {
+						b_player_second[i][j - 1] = symbols_for_second_ground[0];
+					}
+					else b_player_second[i][j - 1] = symbols_for_second_ground[2];
+					flag = true;
+					//break;
+				}
+				else if (i - 1 > 1 &&
+					b_player_second[i][j] == symbols_for_second_ground[0] &&
+					b_player_second[i - 1][j] == space//ячейка выше
+					) {
+					//cout << "proverka_4_" << endl;
+					if (b_enemy[i - 1][j] == symbols[0]) {
+						b_player_second[i - 1][j] = symbols_for_second_ground[0];
+					}
+					else b_player_second[i - 1][j] = symbols_for_second_ground[2];
+					flag = true;
+					//break;
+				}
+				else if (i + 1 < widght &&
+					b_player_second[i][j] == symbols_for_second_ground[0] &&
+					b_player_second[i + 1][j] == space//ячейка ниже
+					) {
+					//cout << "proverka_5_" << endl;
+					if (b_enemy[i + 1][j] == symbols[0]) {
+						b_player_second[i + 1][j] = symbols_for_second_ground[0];
+					}
+					else b_player_second[i + 1][j] = symbols_for_second_ground[2];
+					flag = true;
+					//break;
+				}
+				else count = 1;
+			}
+		}
+	} while (count != 1 && flag != true);
+	cout << "flag = " << flag << endl;
+	cout << "count = " << count << endl;
+	system("pause");
+	if (!flag) {
+		do {
+			bang_random(b_enemy, b_player_second);
+			flag = true;
+		} while (!flag);
+	}
 	show_ground(b_player_second);
 	system("pause");
 	flag = false;

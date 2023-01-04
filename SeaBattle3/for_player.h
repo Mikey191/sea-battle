@@ -45,3 +45,5 @@ void fill_ground_player(char b1[][widght]);
 void bang_player(char b1[][widght], char b2[][widght]);
 
 void bang_random(char b1[][widght], char b2[][widght]);
+
+void bang_smart(char b_enemy[][widght], char b_player_second[][widght]);

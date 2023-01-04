@@ -30,6 +30,7 @@ int main() {
 		cout << "3 - test " << endl;
 		cout << "4 - show bg" << endl;
 		cout << "5 - bang random" << endl;
+		cout << "6 - bang smart" << endl;
 		cout << "0 - exit" << endl;
 		cout << ">>>: ";
 		cin >> menu;
@@ -39,6 +40,7 @@ int main() {
 		case 3: player_1.fill_ground_rand(battle_ground_first_player_ship); break;
 		case 4: show_two_ground(battle_ground_first_player_ship, battle_ground_first_player_bang); system("pause"); break;
 		case 5: bang_random(battle_ground_first_player_ship, battle_ground_first_player_bang); break;
+		case 6: bang_smart(battle_ground_first_player_ship, battle_ground_first_player_bang); break;
 		}
 	} while (menu != 0);
 
