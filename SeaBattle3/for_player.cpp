@@ -1351,8 +1351,136 @@ void bang_random(char b_enemy[][widght], char b_player_second[][widght])
 		}
 	} while (!flag_2);
 	show_ground(b_player_second);
-	system("pause");
+	//system("pause");
 	//flag = false;
+}
+
+void first_chek_for_bang_smart(char b_enemy[][widght], char b_player_second[][widght], int x_old, int y_old, int x_new, int y_new) {
+	//первая проверка на строение корабля (вертикальный или горизонтальный)
+	//если вертикальный у_о == у_n
+	//если горизонтальный x_o == x_n
+	//узнав направление заполняем ячейки если горизонтальный то выше и ниже если вертикальный то правее и левее
+	for (int i = 0; i < widght; i++) {
+		for (int j = 0; j < widght; j++) {
+			//проверяем направление
+			if (x_old == x_new) {//горизонтальный
+				if(x_old < widght)
+					b_player_second[x_old + 1][y_old] = symbols_for_second_ground[2];
+				if(x_old - 1 > 0)
+					b_player_second[x_old - 1][y_old] = symbols_for_second_ground[2];
+				if(x_new + 1 < widght)
+					b_player_second[x_new + 1][y_new] = symbols_for_second_ground[2];
+				if(x_new - 1 > 0)
+					b_player_second[x_new - 1][y_new] = symbols_for_second_ground[2];
+			}
+			if (y_old == y_new) {//вертикальный
+				if(y_old + 1 < widght)
+					b_player_second[x_old][y_old + 1] = symbols_for_second_ground[2];
+				if(y_old - 1 > 0)
+					b_player_second[x_old][y_old - 1] = symbols_for_second_ground[2];
+				if(y_new + 1 < widght)
+					b_player_second[x_new][y_new + 1] = symbols_for_second_ground[2];
+				if(y_new - 1 > 0)
+					b_player_second[x_new][y_new - 1] = symbols_for_second_ground[2];
+			}
+		}
+	}
+}
+
+
+void fill_zero_around_ship(char b1[][widght]) {
+	for (int i = 0; i < widght; i++) {
+		for (int j = 0; j < widght; j++) {
+			if (b1[i][j] == symbols_for_second_ground[0]) {
+				if (b1[i + 1][j] != symbols_for_second_ground[0] && i + 1 > 0 && i + 1 < widght) {
+					b1[i + 1][j] = symbols_for_second_ground[2];
+					if (j + 1 < widght)
+						b1[i + 1][j + 1] = symbols_for_second_ground[2];//точка правее нижней границы
+					if (j - 1 > 0)
+						b1[i + 1][j - 1] = symbols_for_second_ground[2];//точка левее нижней границы
+				}
+				//верхняя граница заполняется точками
+				if (b1[i - 1][j] != symbols_for_second_ground[0] && i - 1 > 0 && i - 1 < widght) {
+					b1[i - 1][j] = symbols_for_second_ground[2];
+					if (j + 1 < widght)
+						b1[i - 1][j + 1] = symbols_for_second_ground[2];//точка правее верхней границы
+					if (j - 1 > 0)
+						b1[i - 1][j - 1] = symbols_for_second_ground[2];//точка левее верхней границы
+				}
+				//правая граница заполняется точками
+				if (b1[i][j + 1] != symbols_for_second_ground[0] && j + 1 > 0 && j + 1 < widght) {
+					b1[i][j + 1] = symbols_for_second_ground[2];
+				}
+				//левая граница заполняется точками
+				if (b1[i][j - 1] != symbols_for_second_ground[0] && j - 1 > 0 && j - 1 < widght) {
+					b1[i][j - 1] = symbols_for_second_ground[2];
+				}
+			}
+		}
+	}
+	show_ground(b1);
+	system("pause");
+}
+
+void second_chek_for_bang_smart(char b_enemy[][widght], char b_player_second[][widght], int x_first_enemy, int y_first_enemy, int x_last_enemy, int y_last_enemy, int x_first_player, int y_first_player, int x_last_player, int y_last_player) {
+	//вторая проверка, потоплен корабль или просто подбит
+	//если Х ячейки в поле для выстрелов совпадают с * ячейками в поле противника и корабль горизонтальный
+	//			проверяем ячейки правее и левее крайних
+	//если Х ячейки в поле для выстрелов совпадают с * ячейками в поле противника и корабль вертикальный
+	//			проверяем ячейки ниже и выше крайних
+	//если все Х == всем * и в краййних ячейках поля игрока стоят . по бокам корабля, заполняем 0 оставшиеся ячейки вокруг Х в поле для выстрела
+	for (int i = 0; i < widght; i++) {
+		for (int j = 0; j < widght; j++) {
+			if (x_first_enemy == x_last_enemy) {//горизонтальный корабль
+				if (b_enemy[x_first_enemy][y_first_enemy] == symbols[0] && // проверка на совпадение первой точки
+					b_player_second[x_first_player][y_first_player] == symbols_for_second_ground[0]) {
+					if (b_enemy[x_last_enemy][y_last_enemy] == symbols[0] && //проверка на совпадение последней точки
+						b_player_second[x_last_player][y_last_player] == symbols_for_second_ground[0]) {
+						if (y_first_enemy - 1 > 0 && //проверка если корабль не у края а в центре
+							y_last_enemy + 1 < widght &&
+							b_enemy[x_first_enemy][y_first_enemy - 1] == symbols[1] &&
+							b_enemy[x_last_enemy][y_last_enemy + 1] == symbols[1]) {
+							fill_zero_around_ship(b_player_second);
+						}
+						if (y_first_enemy == 1 &&//если корабль у левого края
+							b_enemy[x_last_enemy][y_last_enemy + 1] == symbols[1]) {
+							fill_zero_around_ship(b_player_second);
+						}
+						if (y_last_enemy == widght - 1 &&//если корабль у правого края
+							b_enemy[x_first_enemy][y_first_enemy - 1] == symbols[1]) {
+							fill_zero_around_ship(b_player_second);
+						}
+					}
+				}
+			}
+			if (y_first_enemy == y_last_enemy) {//вертикальный корабль
+				if (b_enemy[x_first_enemy][y_first_enemy] == symbols[0] &&
+					b_player_second[x_first_player][y_first_player] == symbols_for_second_ground[0]) {
+					if (b_enemy[x_last_enemy][y_last_enemy] == symbols[0] &&
+						b_player_second[x_last_player][y_last_player] == symbols_for_second_ground[0]) {
+						if (x_first_enemy - 1 > 0 &&//если в центре
+							x_last_enemy + 1 < widght &&
+							b_enemy[x_first_enemy - 1][y_first_enemy] == symbols[1] &&
+							b_enemy[x_last_enemy + 1][y_last_enemy] == symbols[1]
+							) {
+							fill_zero_around_ship(b_player_second);
+						}
+						if (x_first_enemy == 1 &&//если у верхней точки
+							b_enemy[x_last_enemy + 1][y_last_enemy] == symbols[1]
+							) {
+							fill_zero_around_ship(b_player_second);
+						}
+						if (x_last_enemy == widght - 1 &&//если у нижней точки
+							b_enemy[x_last_enemy - 1][y_last_enemy] == symbols[1]
+							) {
+							fill_zero_around_ship(b_player_second);
+						}
+					}
+				}
+			}
+		}
+	}
+
 }
 
 void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
@@ -1378,6 +1506,8 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					//cout << "proverka_2_" << endl;
 					if (b_enemy[i][j + 1] == symbols[0]) {
 						b_player_second[i][j + 1] = symbols_for_second_ground[0];
+						first_chek_for_bang_smart(b_enemy, b_player_second, i, j, i, j + 1);
+						//second_chek_for_bang_smart(b_enemy, b_player_second, )
 					}
 					else b_player_second[i][j + 1] = symbols_for_second_ground[2];
 					flag = true;
@@ -1390,6 +1520,7 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					//cout << "proverka_3_" << endl;
 					if (b_enemy[i][j - 1] == symbols[0]) {
 						b_player_second[i][j - 1] = symbols_for_second_ground[0];
+						first_chek_for_bang_smart(b_enemy, b_player_second, i, j, i, j - 1);
 					}
 					else b_player_second[i][j - 1] = symbols_for_second_ground[2];
 					flag = true;
@@ -1402,6 +1533,7 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					//cout << "proverka_4_" << endl;
 					if (b_enemy[i - 1][j] == symbols[0]) {
 						b_player_second[i - 1][j] = symbols_for_second_ground[0];
+						first_chek_for_bang_smart(b_enemy, b_player_second, i, j, i - 1, j);
 					}
 					else b_player_second[i - 1][j] = symbols_for_second_ground[2];
 					flag = true;
@@ -1414,6 +1546,7 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					//cout << "proverka_5_" << endl;
 					if (b_enemy[i + 1][j] == symbols[0]) {
 						b_player_second[i + 1][j] = symbols_for_second_ground[0];
+						first_chek_for_bang_smart(b_enemy, b_player_second, i, j, i + 1, j);
 					}
 					else b_player_second[i + 1][j] = symbols_for_second_ground[2];
 					flag = true;
@@ -1423,9 +1556,23 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 			}
 		}
 	} while (count != 1 && flag != true);
-	cout << "flag = " << flag << endl;
-	cout << "count = " << count << endl;
-	system("pause");
+	//cout << "flag = " << flag << endl;
+	//cout << "count = " << count << endl;
+	//system("pause");
+
+	//первая проверка на строение корабля (вертикальный или горизонтальный)
+	//если вертикальный у_о == у_n
+	//если горизонтальный x_o == x_n
+	//узнав направление заполняем ячейки если горизонтальный то выше и ниже если вертикальный то правее и левее
+
+
+	//вторая проверка, потоплен корабль или просто подбит
+	//если Х ячейки в поле для выстрелов совпадают с * ячейками в поле противника и корабль горизонтальный
+	//			проверяем ячейки правее и левее крайних
+	//если Х ячейки в поле для выстрелов совпадают с * ячейками в поле противника и корабль вертикальный
+	//			проверяем ячейки ниже и выше крайних
+	//если все Х == всем * и в краййних ячейках поля игрока стоят . по бокам корабля, заполняем 0 оставшиеся ячейки вокруг Х в поле для выстрела
+
 	if (!flag) {
 		do {
 			bang_random(b_enemy, b_player_second);
