@@ -25,6 +25,7 @@ int main() {
 	do {
 		system("cls");
 		cout << "\tMain Menu" << endl;
+		cout << "9 - fill ground space" << endl;
 		cout << "1 - Player vs Player " << endl;
 		cout << "2 - Player vs Computer " << endl;
 		cout << "3 - test " << endl;
@@ -41,6 +42,8 @@ int main() {
 		case 4: show_two_ground(battle_ground_first_player_ship, battle_ground_first_player_bang); system("pause"); break;
 		case 5: bang_random(battle_ground_first_player_ship, battle_ground_first_player_bang); break;
 		case 6: bang_smart(battle_ground_first_player_ship, battle_ground_first_player_bang); break;
+
+		case 9: fill_ground_space(battle_ground_first_player_ship); break;
 		}
 	} while (menu != 0);
 
