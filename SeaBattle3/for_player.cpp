@@ -33,6 +33,7 @@ void show_ground(char b1[][widght]) {
 			cout << b1[i][j] << " ";
 		}cout << endl;
 	}
+	system("pause");
 }
 void show_two_ground(char b1[][widght], char b2[][widght]) {
 	system("cls");
@@ -721,7 +722,150 @@ void fill_ground_random(char b1[][widght]) {
 	} while (ship_count > 0);
 	system("pause");
 }
-
+//для тестов
+void fill_ground_random_fourth_horizont(char b1[][widght]) {
+	system("cls");
+	bool flag = 0;
+	int ship_count = 10;
+	//4 palubi
+	int dir = 0;
+	if (dir == 0) {
+		do
+		{
+			//координаты стартовой точки корабля
+			int x_rand_for_start_ship = rand() % 11;
+			int y_rand_for_start_ship = rand() % 11;
+			cout << "4 palubi: ";
+			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << "; dir = " << dir << endl << endl;
+			if (chek_random_left_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+				if (chek_random_left_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+					if (chek_random_left_therd(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+						if (chek_random_left_fourth(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+							//постраение корабля
+							b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[0];
+							//постраение области вокруг коробля
+								//заполняем строчку выше 
+							if (x_rand_for_start_ship > 1) {
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 3] = symbols[1];
+							}
+							//заполняем строчку ниже//область ниже не должна быть пустой
+							if (x_rand_for_start_ship < 10) {
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 3] = symbols[1];
+							}
+							//заполняем столбец левее 
+							if (y_rand_for_start_ship - 3 > 1) {
+								b1[x_rand_for_start_ship][y_rand_for_start_ship - 4] = symbols[1];//центральная левая точка
+								if (x_rand_for_start_ship > 1)
+									b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 4] = symbols[1];//верхняя левая точка
+								if (x_rand_for_start_ship < 10)
+									b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 4] = symbols[1];//нижняя левая точка
+							}
+							//заполняем столбец правее //область правее не должна быть пустой 
+							if (y_rand_for_start_ship < 10) {
+								b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];//центральня правая точка
+								if (x_rand_for_start_ship > 1)
+									b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];//верхняя правая точка
+								if (x_rand_for_start_ship < 10)
+									b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];//нижняя правая точка
+							}
+							flag = true;
+							ship_count--;
+							cout << "4 palub ship is bilding!" << endl;
+						}
+					}
+				}
+			}
+		} while (flag != true);
+		flag = false;
+		show_ground(b1);
+		system("pause");
+	}
+}
+void fill_ground_random_three_horizont(char b1[][widght]) {
+	system("cls");
+	bool flag = 0;
+	int ship_count = 10;
+	//3 palubi
+	int dir = 0;
+	dir = 0;
+	if (dir == 0) {
+		do
+		{
+			//координаты стартовой точки корабля
+			int x_rand_for_start_ship = rand() % 11;
+			int y_rand_for_start_ship = rand() % 11;
+			cout << "3 palubi: ";
+			cout << "x = " << x_rand_for_start_ship << "; y = " << y_rand_for_start_ship << endl;
+			if (chek_random_left_first(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+				if (chek_random_left_second(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+					if (chek_random_left_therd(b1, x_rand_for_start_ship, y_rand_for_start_ship)) {
+						//постраение корабля
+						b1[x_rand_for_start_ship][y_rand_for_start_ship] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 1] = symbols[0];
+						b1[x_rand_for_start_ship][y_rand_for_start_ship - 2] = symbols[0];
+						//постраение области вокруг коробля
+							//заполняем строчку выше
+						if (x_rand_for_start_ship > 1) {
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 1] = symbols[1];
+							b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 2] = symbols[1];
+						}
+						//заполняем строчку ниже
+						if (x_rand_for_start_ship < 10) {
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 1] = symbols[1];
+							b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 2] = symbols[1];
+						}
+						//заполняем столбец левее
+						if (y_rand_for_start_ship - 2 > 1) {
+							b1[x_rand_for_start_ship][y_rand_for_start_ship - 3] = symbols[1];
+							if (x_rand_for_start_ship > 1)
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship - 3] = symbols[1];
+							if (x_rand_for_start_ship < 10)
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship - 3] = symbols[1];
+						}
+						//заполняем столбец правее
+						if (y_rand_for_start_ship < 10) {
+							b1[x_rand_for_start_ship][y_rand_for_start_ship + 1] = symbols[1];
+							if (x_rand_for_start_ship > 1)
+								b1[x_rand_for_start_ship - 1][y_rand_for_start_ship + 1] = symbols[1];
+							if (x_rand_for_start_ship < 10)
+								b1[x_rand_for_start_ship + 1][y_rand_for_start_ship + 1] = symbols[1];
+						}
+						flag = true;
+						ship_count--;
+						cout << "3 palub ship is bilding!" << endl;
+					}
+				}
+			}
+		} while (flag != true);
+		flag = false;
+		show_ground(b1);
+	}
+}
+void just_bang(char b1[][widght]) {
+	int x, y;
+	cout << "enter x: ";
+	cin >> x;
+	cout << "enter y:";
+	cin >> y;
+	for (int i = 0; i < widght; i++) {
+		for (int j = 0; j < widght; j++) {
+			if (i == x && j == y) b1[i][j] = symbols_for_second_ground[0];
+		}
+	}
+	show_ground(b1);
+}
+//--------------------------------------------------------------
 void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish) {
 	if (x_start == x_finish) {//выбор направления horizont
 		//зачистить старый корабль
@@ -1395,28 +1539,28 @@ void fiil_ship_zero_horizont_forth_part(char b_player_second[][widght], int x_co
 		b_player_second[x_const - 1][y_therd] = symbols_for_second_ground[2];
 		b_player_second[x_const - 1][y_fourth] = symbols_for_second_ground[2];
 
-		b_player_second[x_const - 1][y_first - 1] = symbols_for_second_ground[2];//левее
-		b_player_second[x_const - 1][y_fourth + 1] = symbols_for_second_ground[2];//правее
+		//b_player_second[x_const - 1][y_first - 1] = symbols_for_second_ground[2];//левее
+		//b_player_second[x_const - 1][y_fourth + 1] = symbols_for_second_ground[2];//правее
 	}
-	else if (x_const + 1 < widght) {//проверка нижней границы
+	if (x_const + 1 < widght) {//проверка нижней границы
 		b_player_second[x_const + 1][y_first] = symbols_for_second_ground[2];
 		b_player_second[x_const + 1][y_second] = symbols_for_second_ground[2];
 		b_player_second[x_const + 1][y_therd] = symbols_for_second_ground[2];
 		b_player_second[x_const + 1][y_fourth] = symbols_for_second_ground[2];
 
-		b_player_second[x_const + 1][y_first - 1] = symbols_for_second_ground[2];//левее
-		b_player_second[x_const + 1][y_fourth + 1] = symbols_for_second_ground[2];//правее
+		//b_player_second[x_const + 1][y_first - 1] = symbols_for_second_ground[2];//левее
+		//b_player_second[x_const + 1][y_fourth + 1] = symbols_for_second_ground[2];//правее
 	}
-	//else if (y_first > 1) {//левая граница
-		//b_player_second[x_const][y_first - 1] = symbols_for_second_ground[2];
-		//if (x_const - 1 > 0) b_player_second[x_const - 1][y_first - 1] = symbols_for_second_ground[2];
-		//if (x_const + 1 < widght) b_player_second[x_const + 1][y_first - 1] = symbols_for_second_ground[2];
- 	//}
-	//else if (y_fourth < widght - 1) {//правая граница
-		//b_player_second[x_const][y_fourth + 1] = symbols_for_second_ground[2];
-		//if (x_const - 1 > 0) b_player_second[x_const - 1][y_fourth + 1] = symbols_for_second_ground[2];
-		//if (x_const + 1 < widght) b_player_second[x_const + 1][y_fourth + 1] = symbols_for_second_ground[2];
-	//}
+	if (y_first - 1 > 0) {//левая граница
+		b_player_second[x_const][y_first - 1] = symbols_for_second_ground[2];
+		if (x_const - 1 > 0) b_player_second[x_const - 1][y_first - 1] = symbols_for_second_ground[2];
+		if (x_const + 1 < widght) b_player_second[x_const + 1][y_first - 1] = symbols_for_second_ground[2];
+ 	}
+	if (y_fourth + 1 < widght) {//правая граница
+		b_player_second[x_const][y_fourth + 1] = symbols_for_second_ground[2];
+		if (x_const - 1 > 0) b_player_second[x_const - 1][y_fourth + 1] = symbols_for_second_ground[2];
+		if (x_const + 1 < widght) b_player_second[x_const + 1][y_fourth + 1] = symbols_for_second_ground[2];
+	}
 }
 void fiil_ship_zero_horizont_three_part(char b_player_second[][widght], int x_const, int y_first, int y_second, int y_therd){
 	if (x_const - 1 > 0) {//верхняя граница
@@ -1429,12 +1573,12 @@ void fiil_ship_zero_horizont_three_part(char b_player_second[][widght], int x_co
 		b_player_second[x_const + 1][y_second] = symbols_for_second_ground[2];
 		b_player_second[x_const + 1][y_therd] = symbols_for_second_ground[2];
 	}
-	if (y_first > 1) {//левая граница
+	if (y_first - 1 > 0) {//левая граница
 		b_player_second[x_const][y_first - 1] = symbols_for_second_ground[2];
 		if (x_const - 1 > 0) b_player_second[x_const - 1][y_first - 1] = symbols_for_second_ground[2];
 		if (x_const + 1 < widght) b_player_second[x_const + 1][y_first - 1] = symbols_for_second_ground[2];
 	}
-	if (y_therd < widght - 1) {//правая граница
+	if (y_therd + 1 < widght) {//правая граница
 		b_player_second[x_const][y_therd + 1] = symbols_for_second_ground[2];
 		if (x_const - 1 > 0) b_player_second[x_const - 1][y_therd + 1] = symbols_for_second_ground[2];
 		if (x_const + 1 < widght) b_player_second[x_const + 1][y_therd + 1] = symbols_for_second_ground[2];
@@ -1449,12 +1593,12 @@ void fiil_ship_zero_horizont_two_part(char b_player_second[][widght], int x_cons
 		b_player_second[x_const + 1][y_first] = symbols_for_second_ground[2];
 		b_player_second[x_const + 1][y_second] = symbols_for_second_ground[2];
 	}
-	if (y_first > 1) {//левая граница
+	if (y_first - 1 > 0) {//левая граница
 		b_player_second[x_const][y_first - 1] = symbols_for_second_ground[2];
 		if (x_const - 1 > 0) b_player_second[x_const - 1][y_first - 1] = symbols_for_second_ground[2];
 		if (x_const + 1 < widght) b_player_second[x_const + 1][y_first - 1] = symbols_for_second_ground[2];
 	}
-	if (y_second < widght - 1) {//правая граница
+	if (y_second + 1 < widght) {//правая граница
 		b_player_second[x_const][y_second + 1] = symbols_for_second_ground[2];
 		if (x_const - 1 > 0) b_player_second[x_const - 1][y_second + 1] = symbols_for_second_ground[2];
 		if (x_const + 1 < widght) b_player_second[x_const + 1][y_second + 1] = symbols_for_second_ground[2];
@@ -1463,9 +1607,13 @@ void fiil_ship_zero_horizont_two_part(char b_player_second[][widght], int x_cons
 void fiil_ship_zero_one_part(char b_player_second[][widght], int x_const, int y_first){
 	if (x_const - 1 > 0) {//верхняя граница
 		b_player_second[x_const - 1][y_first] = symbols_for_second_ground[2];
+		if (y_first - 1 > 0) b_player_second[x_const - 1][y_first - 1] = symbols_for_second_ground[2];
+		if (y_first + 1 < widght) b_player_second[x_const - 1][y_first + 1] = symbols_for_second_ground[2];
 	}
 	if (x_const + 1 < widght) {//проверка нижней границы
 		b_player_second[x_const + 1][y_first] = symbols_for_second_ground[2];
+		if (y_first - 1 > 0) b_player_second[x_const + 1][y_first - 1] = symbols_for_second_ground[2];
+		if (y_first + 1 < widght) b_player_second[x_const + 1][y_first + 1] = symbols_for_second_ground[2];
 	}
 	if (y_first > 1) {//левая граница
 		b_player_second[x_const][y_first - 1] = symbols_for_second_ground[2];
@@ -1493,7 +1641,30 @@ void chek_four_part_horizont(char b_enemy[][widght], char b_player_second[][widg
 				b_player_second[i][j + 2] == symbols_for_second_ground[0] &&
 				b_player_second[i][j + 3] == symbols_for_second_ground[0]
 				) {
-				if (b_enemy[i][j - 1] == symbols[1] || b_enemy[i][j + 4] == symbols[1]) {
+				if (
+					b_enemy[i][j - 1] == symbols[1] &&
+					b_enemy[i][j + 4] == symbols[1]
+					) {
+					cout << "fill zero 4.1 part" << endl;
+					system("pause");
+					fiil_ship_zero_horizont_forth_part(b_player_second, i, j, j + 1, j + 2, j + 3);
+				}
+				else if (
+					j == 1 &&
+					b_enemy[i][j] == symbols[0] &&
+					b_enemy[i][j + 4] == symbols[1]
+					) {
+					cout << "fill zero 4.2 part" << endl;
+					system("pause");
+					fiil_ship_zero_horizont_forth_part(b_player_second, i, j, j + 1, j + 2, j + 3);
+				}
+				else if (
+					j + 3 == widght - 1 &&
+					b_enemy[i][j - 1] == symbols[1] &&
+					b_enemy[i][j + 3] == symbols[0]
+					) {
+					cout << "fill zero 4.3 part" << endl;
+					system("pause");
 					fiil_ship_zero_horizont_forth_part(b_player_second, i, j, j + 1, j + 2, j + 3);
 				}
 			}
@@ -1503,16 +1674,39 @@ void chek_four_part_horizont(char b_enemy[][widght], char b_player_second[][widg
 void chek_three_part_horizont(char b_enemy[][widght], char b_player_second[][widght]){
 	for (int i = 0; i < widght; i++) {
 		for (int j = 0; j < widght; j++) {
-			if (//проверяем 4 палубы в поле врага
+			if (//проверяем 3 палубы в поле врага
 				b_enemy[i][j] == symbols[0] &&
 				b_enemy[i][j + 1] == symbols[0] &&
 				b_enemy[i][j + 2] == symbols[0] &&
-				//проверяем 4 палубы в своем поле
+				//проверяем 3 палубы в своем поле
 				b_player_second[i][j] == symbols_for_second_ground[0] &&
 				b_player_second[i][j + 1] == symbols_for_second_ground[0] &&
 				b_player_second[i][j + 2] == symbols_for_second_ground[0]
 				) {
-				if (b_enemy[i][j - 1] == symbols[1] || b_enemy[i][j + 3] == symbols[1]) {
+				if (
+					b_enemy[i][j - 1] == symbols[1] &&
+					b_enemy[i][j + 3] == symbols[1]
+					) {
+					cout << "fill zero 3.1 part" << endl;
+					system("pause");
+					fiil_ship_zero_horizont_three_part(b_player_second, i, j, j + 1, j + 2);
+				}
+				else if (
+					j == 1 &&
+					b_enemy[i][j] == symbols[0] &&
+					b_enemy[i][j + 3] == symbols[1]
+					) {
+					cout << "fill zero 3.2 part" << endl;
+					system("pause");
+					fiil_ship_zero_horizont_three_part(b_player_second, i, j, j + 1, j + 2);
+				}
+				else if (
+					j + 2 == widght - 1 &&
+					b_enemy[i][j - 1] == symbols[1] &&
+					b_enemy[i][j + 2] == symbols[0]
+					) {
+					cout << "fill zero 3.3 part" << endl;
+					system("pause");
 					fiil_ship_zero_horizont_three_part(b_player_second, i, j, j + 1, j + 2);
 				}
 			}
@@ -1529,7 +1723,30 @@ void chek_two_part_horizont(char b_enemy[][widght], char b_player_second[][widgh
 				b_player_second[i][j] == symbols_for_second_ground[0] &&
 				b_player_second[i][j + 1] == symbols_for_second_ground[0]
 				) {
-				if (b_enemy[i][j - 1] == symbols[1] || b_enemy[i][j + 2] == symbols[1]) {
+				if (
+					b_enemy[i][j - 1] == symbols[1] &&
+					b_enemy[i][j + 2] == symbols[1]
+					) {
+					cout << "fill zero 2.1 part" << endl;
+					system("pause");
+					fiil_ship_zero_horizont_two_part(b_player_second, i, j, j + 1);
+				}
+				else if (
+					j == 1 &&
+					b_enemy[i][j] == symbols[0] &&
+					b_enemy[i][j + 2] == symbols[1]
+					) {
+					cout << "fill zero 2.2 part" << endl;
+					system("pause");
+					fiil_ship_zero_horizont_two_part(b_player_second, i, j, j + 1);
+				}
+				else if (
+					j + 1 == widght - 1 &&
+					b_enemy[i][j - 1] == symbols[1] &&
+					b_enemy[i][j + 1] == symbols[0]
+					) {
+					cout << "fill zero 2.3 part" << endl;
+					system("pause");
 					fiil_ship_zero_horizont_two_part(b_player_second, i, j, j + 1);
 				}
 			}
@@ -1544,9 +1761,66 @@ void chek_one_part(char b_enemy[][widght], char b_player_second[][widght]){
 				//проверяем 1 палубы в своем поле
 				b_player_second[i][j] == symbols_for_second_ground[0] 
 				) {
-				if ((b_enemy[i][j - 1] == symbols[1] || b_enemy[i][j + 1] == symbols[1]) &&
-					(b_enemy[i - 1][j] == symbols[1] || b_enemy[i + 1][j] == symbols[1])
+				if (//если в центре
+					b_enemy[i][j + 1] == symbols[1] &&
+					b_enemy[i][j - 1] == symbols[1] &&
+					b_enemy[i + 1][j] == symbols[1] &&
+					b_enemy[i - 1][j] == symbols[1]
 					) {
+					cout << "fill zero 1.1 part" << endl;
+					system("pause");
+					fiil_ship_zero_one_part(b_player_second, i, j);
+				}
+				else if (//если сверху
+					i == 1 &&
+					//левее
+					b_enemy[i][j - 1] == symbols[1] &&
+					//правее
+					b_enemy[i][j + 1] == symbols[1] &&
+					//ниже
+					b_enemy[i + 1][j] == symbols[1]
+					) {
+					cout << "fill zero 1.2 part" << endl;
+					system("pause");
+					fiil_ship_zero_one_part(b_player_second, i, j);
+				}
+				else if (//если снизу
+					i == widght - 1 &&
+					//левее
+					b_enemy[i][j - 1] == symbols[1] &&
+					//правее
+					b_enemy[i][j + 1] == symbols[1] &&
+					//выше
+					b_enemy[i - 1][j] == symbols[1]
+					) {
+					cout << "fill zero 1.3 part" << endl;
+					system("pause");
+					fiil_ship_zero_one_part(b_player_second, i, j);
+				}
+				else if (//если слева
+					j == 1 &&
+					//выше
+					b_enemy[i - 1][j] == symbols[1] &&
+					//ниже
+					b_enemy[i + 1][j] == symbols[1] &&
+					//правее
+					b_enemy[i][j + 1] == symbols[1]
+					) {
+					cout << "fill zero 1.4 part" << endl;
+					system("pause");
+					fiil_ship_zero_one_part(b_player_second, i, j);
+				}
+				else if (//если справа
+					j == widght - 1 &&
+					//выше
+					b_enemy[i - 1][j] == symbols[1] &&
+					//ниже
+					b_enemy[i + 1][j] == symbols[1] &&
+					//левее
+					b_enemy[i][j - 1] == symbols[1]
+					) {
+					cout << "fill zero 1.5 part" << endl;
+					system("pause");
 					fiil_ship_zero_one_part(b_player_second, i, j);
 				}
 			}
@@ -1586,7 +1860,7 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					flag = true;
 					//break;
 				}
-				if (j - 1 > 1 &&
+				else if (j - 1 > 0 &&
 					b_player_second[i][j] == symbols_for_second_ground[0] &&
 					b_player_second[i][j - 1] == space//ячейка левее
 					) {
@@ -1601,7 +1875,7 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					flag = true;
 					//break;
 				}
-				if (i - 1 > 1 &&
+				else if (i - 1 > 0 &&
 					b_player_second[i][j] == symbols_for_second_ground[0] &&
 					b_player_second[i - 1][j] == space//ячейка выше
 					) {
@@ -1619,8 +1893,8 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					//j = widght;
 					flag = true;
 					//break;
-				}
-				if (i + 1 < widght &&
+				}//выше
+				else if (i + 1 < widght &&
 					b_player_second[i][j] == symbols_for_second_ground[0] &&
 					b_player_second[i + 1][j] == space//ячейка ниже
 					) {
@@ -1638,7 +1912,7 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 					//j = widght;
 					flag = true;
 					//break;
-				}
+				}//ниже
 				//else count = 1;
 			}
 		}
@@ -1669,10 +1943,14 @@ void bang_smart(char b_enemy[][widght], char b_player_second[][widght]) {
 	}
 
 	//second_chek_with_fill_zero(b_enemy, b_player_second);
-	//chek_four_part_horizont(b_enemy, b_player_second);
-	//chek_three_part_horizont(b_enemy, b_player_second);
-	//chek_two_part_horizont(b_enemy, b_player_second);
-	//chek_one_part(b_enemy, b_player_second);
+	chek_four_part_horizont(b_enemy, b_player_second);
+	show_ground(b_player_second);
+	chek_three_part_horizont(b_enemy, b_player_second);
+	show_ground(b_player_second);
+	chek_two_part_horizont(b_enemy, b_player_second);
+	show_ground(b_player_second);
+	chek_one_part(b_enemy, b_player_second);
+	show_ground(b_player_second);
 
 	show_ground(b_player_second);
 	system("pause");

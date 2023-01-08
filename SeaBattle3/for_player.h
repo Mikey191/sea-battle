@@ -12,6 +12,8 @@ extern char letters[10];
 extern char symbols[3];
 extern char symbols_for_second_ground[3];
 
+
+
 void fill_ground_space(char b1[][widght]);
 void show_ground(char b1[][widght]);
 void show_two_ground(char b1[][widght], char b2[][widght]);
@@ -26,6 +28,12 @@ bool chek_random_up_second(char b1[][widght], const int& x_rand_for_start_ship, 
 bool chek_random_up_therd(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship);
 bool chek_random_up_fourth(char b1[][widght], const int& x_rand_for_start_ship, const int& y_rand_for_start_ship);
 void fill_ground_random(char b1[][widght]);
+
+//для тестов
+void fill_ground_random_fourth_horizont(char b1[][widght]);
+void fill_ground_random_three_horizont(char b1[][widght]);
+void just_bang(char b1[][widght]);
+//---------------------------------------------------------
 
 void dir_down(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish);
 void dir_up(char b1[][widght], int& x_start, int& y_start, int& x_finish, int& y_finish);
