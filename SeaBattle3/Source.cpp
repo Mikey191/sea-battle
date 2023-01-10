@@ -33,7 +33,7 @@ int main() {
 		cout << "5 - bang random" << endl;
 		cout << "6 - bang smart" << endl;
 		cout << "7 - random horizon 4part ship" << endl;
-		cout << "8 - random horizon 3part ship" << endl;
+		cout << "8 - random vertical 4part ship" << endl;
 		cout << "0 - exit" << endl;
 		cout << ">>>: ";
 		cin >> menu;
@@ -45,7 +45,7 @@ int main() {
 		case 5: bang_random(battle_ground_first_player_ship, battle_ground_first_player_bang); break;
 		case 6: bang_smart(battle_ground_first_player_ship, battle_ground_first_player_bang); break;
 		case 7: fill_ground_random_fourth_horizont(battle_ground_first_player_ship); break;
-		case 8: fill_ground_random_three_horizont(battle_ground_first_player_ship); break;
+		case 8: fill_ground_random_fourth_vertical(battle_ground_first_player_ship); break;
 		case 9: fill_ground_space(battle_ground_first_player_ship); break;
 		}
 	} while (menu != 0);

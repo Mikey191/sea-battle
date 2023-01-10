@@ -32,6 +32,7 @@ void fill_ground_random(char b1[][widght]);
 //для тестов
 void fill_ground_random_fourth_horizont(char b1[][widght]);
 void fill_ground_random_three_horizont(char b1[][widght]);
+void fill_ground_random_fourth_vertical(char b1[][widght]);
 void just_bang(char b1[][widght]);
 //---------------------------------------------------------
 
